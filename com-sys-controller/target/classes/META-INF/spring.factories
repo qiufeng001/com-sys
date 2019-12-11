@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.sys.controller.configuration.WebAutoConfiguration,\
-  com.sys.controller.configuration.WebMvcConfig
