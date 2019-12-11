@@ -1,0 +1,4 @@
+com\sys\service\admin\impl\UserServiceImpl.class
+com\sys\service\admin\IUserService.class
+com\sys\service\configuration\ServiceAutoConfig.class
+com\sys\service\configuration\ServiceModelAutoConfiguration.class
