@@ -35,6 +35,6 @@ public class UserController extends BaseController<User, String> {
     @RequestMapping("test")
     @ResponseBody
     public String test() {
-        return "test:";
+        return "Zhan jian is a big belle.最美啦！";
     }
 }
