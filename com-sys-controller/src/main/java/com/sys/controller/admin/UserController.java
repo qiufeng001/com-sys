@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * UserController
  *
@@ -36,5 +38,12 @@ public class UserController extends BaseController<User, String> {
     @ResponseBody
     public String test() {
         return "Zhan jian is a big belle.最美啦！";
+    }
+
+    @RequestMapping("userInfo")
+    @ResponseBody
+    public String test(HttpServletRequest request) {
+        String username = request.getParameter("username");
+        return username;
     }
 }

@@ -1,6 +1,7 @@
-package com.sys.core.inspect;
+package com.sys.controller.configuration;
 
 import com.sys.core.configuration.Config;
+import com.sys.core.inspect.ExecutionContext;
 import com.sys.core.util.CookieUtils;
 import com.sys.core.util.DomainUtils;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -19,7 +20,7 @@ import java.util.HashMap;
  */
 @Component
 @ServletComponentScan
-@WebFilter(urlPatterns = "/*", filterName = "platFormFilter")
+@WebFilter(urlPatterns = "/*")
 public class PlatFormFilter implements Filter {
 
     @Override

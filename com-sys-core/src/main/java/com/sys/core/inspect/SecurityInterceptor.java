@@ -14,7 +14,8 @@ public class SecurityInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-
+		// 跨域设置
+		this.originStting(response);
 		String url = request.getRequestURI();
 		// GlobalFilter.setResponse(response);
 
@@ -60,5 +61,15 @@ public class SecurityInterceptor implements HandlerInterceptor {
 			throws Exception {
 		// GlobalFilter.clear();
 		ExecutionContext.getContextMap().put(ExecutionContext.getContextMap().get(Config.CURRENT_THEAD_ID), "");
+	}
+
+	/**
+	 * 跨域问题解决（react 端加上无效）
+	 * @param response
+	 */
+	private void originStting(HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type,token");
+		response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, PATCH");
 	}
 }
