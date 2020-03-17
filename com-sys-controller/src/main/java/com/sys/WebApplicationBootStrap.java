@@ -1,10 +1,8 @@
 package com.sys;
 
 import com.sys.core.configuration.ApplicationBootStrap;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -16,7 +14,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableTransactionManagement // 事物注解
 @ComponentScan(basePackages = {
-        "com.sys.controller"
+        "com.sys.controller",
+        "com.sys.security"
 })
 public class WebApplicationBootStrap extends ApplicationBootStrap {
 

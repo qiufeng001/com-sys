@@ -1,5 +1,6 @@
 package com.sys.controller.admin;
 
+import com.sys.security.cas.CasProperty;
 import com.sys.core.controller.impl.BaseController;
 import com.sys.core.service.IService;
 import com.sys.model.admin.User;
@@ -23,6 +24,8 @@ public class UserController extends BaseController<User, String> {
 
     @Autowired
     private IUserService service;
+    @Autowired
+    private CasProperty casProperty;
 
     @Override
     protected IService<User, String> getService() {
@@ -37,7 +40,8 @@ public class UserController extends BaseController<User, String> {
     @RequestMapping("test")
     @ResponseBody
     public String test() {
-        return "Zhan jian is a big belle.最美啦！";
+        String url = casProperty.getCasLoginUrl();
+        return url;
     }
 
     @RequestMapping("userInfo")

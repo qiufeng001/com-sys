@@ -21,6 +21,7 @@ import java.util.Map;
  *
  */
 public class Query implements Serializable {
+
 	/**
 	 *
 	 */
@@ -32,6 +33,7 @@ public class Query implements Serializable {
 		Map<String, Object> map = new HashMap<>();
 		return map;
 	}
+
 
 	public String getSort() {
 
