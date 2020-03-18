@@ -40,6 +40,7 @@ public class ShiroConfig {
     @Bean(name = "shiroCasRealm")
     public ShiroCasRealm shiroCasRealm(EhCacheManager cacheManager, CasProperty casProperty) {
         ShiroCasRealm realm = new ShiroCasRealm();
+        realm.setAuthenticationCachingEnabled(false);
         realm.setCacheManager(cacheManager);
         realm.setCasServerUrlPrefix(casProperty.getCasServerUrlPrefix());
         // 客户端回调地址
@@ -137,9 +138,7 @@ public class ShiroConfig {
      * @create 2016年1月14日
      */
     private void loadShiroFilterChain(ShiroFilterFactoryBean shiroFilterFactoryBean, CasProperty casProperty) {
-        /////////////////////// 下面这些规则配置最好配置到配置文件中 ///////////////////////
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
-
         filterChainDefinitionMap.put(casProperty.getCasFilterUrlPattern(), "casFilter");
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
@@ -149,10 +148,9 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/druid/**", "anon");
         filterChainDefinitionMap.put("/upload/**", "anon");
         filterChainDefinitionMap.put("/files/**", "anon");
-        //filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/blog", "anon");
         filterChainDefinitionMap.put("/blog/open/**", "anon");
-        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/**", "anon");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
     }
 

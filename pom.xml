@@ -27,6 +27,7 @@
         <mysql-connector.version>8.0.18</mysql-connector.version>
         <spring.version>5.2.0.RELEASE</spring.version>
         <commons-lang3.version>3.9</commons-lang3.version>
+        <commons-lang.version>2.6</commons-lang.version>
         <fastjson.verson>2.10.0</fastjson.verson>
     </properties>
 
@@ -75,6 +76,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons-lang.version}</version>
         </dependency>
         <!-- json -->
         <dependency>

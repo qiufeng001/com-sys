@@ -39,7 +39,7 @@ public class ShiroCasRealm extends CasRealm {
     public void initProperty() {
         super.setCasServerUrlPrefix(casServerUrlPrefix);
         // 客户端回调地址
-        // setCasService(loginSuccessUrl);
+         setCasService(loginSuccessUrl);
     }
 
     /**

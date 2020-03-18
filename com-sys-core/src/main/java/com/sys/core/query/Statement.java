@@ -1,9 +1,9 @@
 package com.sys.core.query;
 
-import com.framework.core.util.Helper;
-import com.framework.core.util.date.DateUtil;
+import com.sys.core.util.Helper;
+import com.sys.core.util.date.DateUtil;
 import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -39,7 +39,7 @@ public class Statement extends NodeStatement implements Serializable {
 		}
 
 		else if(value instanceof Date && value != null){
-			this.value=DateUtil.getDateTime((Date)value);
+			this.value= DateUtil.getDateTime((Date)value);
 		}else{
 			this.value = value;
 		}

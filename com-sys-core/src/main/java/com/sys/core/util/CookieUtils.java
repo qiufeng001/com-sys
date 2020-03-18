@@ -34,7 +34,7 @@ public class CookieUtils {
      * @return
      */
     public static void setCookie(HttpServletResponse response, HttpServletRequest request, String token) {
-        Cookie cookie = new Cookie("wx_redis_cookie", token);
+        Cookie cookie = new Cookie("cas_token", token);
         cookie.setMaxAge(60 * 60 * 60);
 
         response.setHeader("Access-Control-Allow-Credentials", "true");
@@ -48,7 +48,7 @@ public class CookieUtils {
         String token = "";
         if(cookies != null && cookies.length > 0) {
             for(Cookie cookie : cookies){
-                if(cookie.getName().equals("wx_redis_cookie")){
+                if(cookie.getName().equals("cas_token")){
                     token = cookie.getValue();
                 }
             }
