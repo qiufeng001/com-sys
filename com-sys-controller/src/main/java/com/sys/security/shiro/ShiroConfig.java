@@ -40,7 +40,7 @@ public class ShiroConfig {
     @Bean(name = "shiroCasRealm")
     public ShiroCasRealm shiroCasRealm(EhCacheManager cacheManager, CasProperty casProperty) {
         ShiroCasRealm realm = new ShiroCasRealm();
-        realm.setAuthenticationCachingEnabled(false);
+//        realm.setAuthenticationCachingEnabled(false);
         realm.setCacheManager(cacheManager);
         realm.setCasServerUrlPrefix(casProperty.getCasServerUrlPrefix());
         // 客户端回调地址
@@ -150,7 +150,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/files/**", "anon");
         filterChainDefinitionMap.put("/blog", "anon");
         filterChainDefinitionMap.put("/blog/open/**", "anon");
-        filterChainDefinitionMap.put("/**", "anon");
+        filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
     }
 
