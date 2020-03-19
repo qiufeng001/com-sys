@@ -1,0 +1,2 @@
+com\sys\domain\admin\UserRepository.class
+com\sys\domain\configuration\DomainAutoConfig.class

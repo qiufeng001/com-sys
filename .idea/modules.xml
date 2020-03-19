@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/com-sys.iml" filepath="$PROJECT_DIR$/.idea/com-sys.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com-sys-controller/com-sys-controller.iml" filepath="$PROJECT_DIR$/com-sys-controller/com-sys-controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com-sys-core/com-sys-core.iml" filepath="$PROJECT_DIR$/com-sys-core/com-sys-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com-sys-domain/com-sys-domain.iml" filepath="$PROJECT_DIR$/com-sys-domain/com-sys-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com-sys-model/com-sys-model.iml" filepath="$PROJECT_DIR$/com-sys-model/com-sys-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com-sys-service/com-sys-service.iml" filepath="$PROJECT_DIR$/com-sys-service/com-sys-service.iml" />
+    </modules>
+  </component>
+</project>

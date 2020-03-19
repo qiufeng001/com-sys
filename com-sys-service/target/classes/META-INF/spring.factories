@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.sys.service.configuration.ServiceAutoConfig,\
+com.sys.service.configuration.ServiceModelAutoConfiguration

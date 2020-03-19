@@ -140,16 +140,16 @@ public class ShiroConfig {
     private void loadShiroFilterChain(ShiroFilterFactoryBean shiroFilterFactoryBean, CasProperty casProperty) {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         filterChainDefinitionMap.put(casProperty.getCasFilterUrlPattern(), "casFilter");
-        filterChainDefinitionMap.put("/css/**", "anon");
-        filterChainDefinitionMap.put("/js/**", "anon");
-        filterChainDefinitionMap.put("/fonts/**", "anon");
-        filterChainDefinitionMap.put("/img/**", "anon");
-        filterChainDefinitionMap.put("/docs/**", "anon");
-        filterChainDefinitionMap.put("/druid/**", "anon");
-        filterChainDefinitionMap.put("/upload/**", "anon");
-        filterChainDefinitionMap.put("/files/**", "anon");
-        filterChainDefinitionMap.put("/blog", "anon");
-        filterChainDefinitionMap.put("/blog/open/**", "anon");
+//        filterChainDefinitionMap.put("/css/**", "anon");
+//        filterChainDefinitionMap.put("/js/**", "anon");
+//        filterChainDefinitionMap.put("/fonts/**", "anon");
+//        filterChainDefinitionMap.put("/img/**", "anon");
+//        filterChainDefinitionMap.put("/docs/**", "anon");
+//        filterChainDefinitionMap.put("/druid/**", "anon");
+//        filterChainDefinitionMap.put("/upload/**", "anon");
+//        filterChainDefinitionMap.put("/files/**", "anon");
+//        filterChainDefinitionMap.put("/blog", "anon");
+//        filterChainDefinitionMap.put("/blog/open/**", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
     }
@@ -159,12 +159,12 @@ public class ShiroConfig {
      *
      */
     @Bean(name = "casFilter")
-    public CasFilter getCasFilter() {
+    public CasFilter getCasFilter(CasProperty casProperty) {
         CasFilter casFilter = new CasFilter();
         casFilter.setName("casFilter");
         casFilter.setEnabled(true);
         // 登录失败后跳转的URL，也就是 Shiro 执行 CasRealm 的 doGetAuthenticationInfo 方法向CasServer验证tiket
-        casFilter.setFailureUrl(casFilter.getLoginUrl());// 我们选择认证失败后再打开登录页面
+        casFilter.setFailureUrl(casProperty.getLoginUrl());// 我们选择认证失败后再打开登录页面
         return casFilter;
     }
 
