@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -21,6 +22,7 @@ import java.util.HashMap;
 @Component
 @ServletComponentScan
 @WebFilter(urlPatterns = "/*")
+
 public class PlatFormFilter implements Filter {
 
     @Override
@@ -62,5 +64,16 @@ public class PlatFormFilter implements Filter {
     private String getCookieDomain(String serverName) {
         String baseDomain = DomainUtils.getBaseDomain(serverName);
         return "." + baseDomain;
+    }
+
+    /**
+     * 跨域问题解决（react 端加上无效）
+     * @param res
+     */
+    private void setHeader(ServletResponse res) {
+        HttpServletResponse response = (HttpServletResponse) res;
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type,token");
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, PATCH");
     }
 }
