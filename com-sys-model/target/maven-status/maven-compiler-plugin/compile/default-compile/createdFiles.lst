@@ -1,6 +1,0 @@
-com\sys\model\base\entity\Entity.class
-com\sys\model\base\entity\StringEntity.class
-com\sys\model\base\entity\Type.class
-com\sys\model\base\entity\Dictionary.class
-com\sys\model\base\entity\LongEntity.class
-com\sys\model\admin\User.class
