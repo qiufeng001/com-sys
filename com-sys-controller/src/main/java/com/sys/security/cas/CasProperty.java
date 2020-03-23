@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
  *
  * @author z.h
  */
-//@Component
-//@ConfigurationProperties(prefix = "cas")
-//@PropertySource(value = { "classpath:conf/cas-conf.properties" })
+@Component
+@ConfigurationProperties(prefix = "cas-shiro")
+@PropertySource(value = { "classpath:conf/cas-conf.properties" })
 public class CasProperty extends AbstractCasProperty {
 
 }

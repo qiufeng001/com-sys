@@ -29,7 +29,7 @@ import java.util.*;
  *
  * @author z.h
  */
-//@Configuration
+@Configuration
 public class ShiroConfig {
 
     @Bean(name = "shiroCasRealm")

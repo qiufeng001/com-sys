@@ -26,10 +26,10 @@ import java.util.Map;
  */
 public class ShiroCasRealm extends CasRealm {
     // cas服务器地址
-    @Value("${cas.casServerUrlPrefix}")
+    @Value("${cas-shiro.casServerUrlPrefix}")
     public String casServerUrlPrefix;
     // 登录成功地址
-    @Value("${cas.loginSuccessUrl}")
+    @Value("${cas-shiro.loginSuccessUrl}")
     public String loginSuccessUrl;
 
     @Autowired
