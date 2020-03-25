@@ -17,13 +17,6 @@
             <artifactId>com-sys-service</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- 配置热部署 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-            <scope>runtime</scope>
-        </dependency>
     </dependencies>
 
     <build>

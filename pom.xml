@@ -23,8 +23,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <mybatis.version>2.1.1</mybatis.version>
-        <mysql-connector.version>8.0.18</mysql-connector.version>
+        <mybatis.version>2.1.2</mybatis.version>
         <spring.version>5.2.0.RELEASE</spring.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-lang.version>2.6</commons-lang.version>
@@ -60,11 +59,11 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>${mybatis.version}</version>
         </dependency>
-        <!-- mysql 驱动 -->
+        <!--druid连接池-->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql-connector.version}</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.21</version>
         </dependency>
 
         <!-- spring -->
@@ -105,13 +104,6 @@
             <artifactId>jackson-annotations</artifactId>
             <version>${fastjson.verson}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
-            <scope>provided</scope>
-        </dependency>
         <!-- shiro -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
@@ -139,13 +131,17 @@
             <version>${shiro-cas.version}</version>
         </dependency>
 
-        <!-- cas 客户端-->
-  <!--      <dependency>
-            <groupId>net.unicon.cas</groupId>
-            <artifactId>cas-client-autoconfig-support</artifactId>
-            <version>${cas-client.version}</version>
-        </dependency>-->
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+        <!-- 配置热部署 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
-
-
 </project>

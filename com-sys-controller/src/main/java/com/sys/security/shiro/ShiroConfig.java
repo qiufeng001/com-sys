@@ -1,5 +1,6 @@
 package com.sys.security.shiro;
 
+import com.sys.controller.configuration.PlatFormFilter;
 import com.sys.security.cas.CasProperty;
 import net.sf.ehcache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
@@ -65,12 +66,18 @@ public class ShiroConfig {
      */
     @Bean
     public FilterRegistrationBean singleSignOutFilter() {
-        FilterRegistrationBean bean = new FilterRegistrationBean();
+    /*    FilterRegistrationBean bean = new FilterRegistrationBean();
         bean.setName("singleSignOutFilter");
         bean.setFilter(new SingleSignOutFilter());
         bean.addUrlPatterns("/");
         bean.setEnabled(true);
-        return bean;
+        return bean;*/
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+        filterRegistrationBean.setFilter(new DelegatingFilterProxy("shiroFilter"));
+        filterRegistrationBean.addInitParameter("targetFilterLifecycle", "true");
+        filterRegistrationBean.setEnabled(true);
+        filterRegistrationBean.addUrlPatterns("/*");
+        return filterRegistrationBean;
     }
 
     /**
@@ -133,8 +140,8 @@ public class ShiroConfig {
      * @create 2016年1月14日
      */
     private void loadShiroFilterChain(ShiroFilterFactoryBean shiroFilterFactoryBean, CasProperty casProperty) {
-        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put(casProperty.getCasFilterUrlPattern(), "casFilter");
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
+        filterChainDefinitionMap.put(casProperty.getShiroFilterUrlPattern(), "casFilter");
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
         filterChainDefinitionMap.put("/fonts/**", "anon");
@@ -145,7 +152,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/files/**", "anon");
         filterChainDefinitionMap.put("/blog", "anon");
         filterChainDefinitionMap.put("/blog/open/**", "anon");
-        filterChainDefinitionMap.put("/**", "authc");
+//        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/**", "user");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
     }
 
@@ -160,6 +168,7 @@ public class ShiroConfig {
         casFilter.setEnabled(true);
         // 登录失败后跳转的URL，也就是 Shiro 执行 CasRealm 的 doGetAuthenticationInfo 方法向CasServer验证tiket
         casFilter.setFailureUrl(casProperty.getLoginUrl());// 我们选择认证失败后再打开登录页面
+        casFilter.setSuccessUrl(casProperty.getShiroServerUrlPrefix() + casProperty.getShiroFilterUrlPattern());
         return casFilter;
     }
 
@@ -179,11 +188,13 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl(casProperty.getLoginUrl());
         // 登录成功后要跳转的连接
 //    shiroFilterFactoryBean.setSuccessUrl(CasProp.loginSuccessUrl);
-        shiroFilterFactoryBean.setUnauthorizedUrl(casProperty.getUnauthorizedUrl());
+        shiroFilterFactoryBean.setUnauthorizedUrl(casProperty.getShiroServerUrlPrefix() + casProperty.getUnauthorizedUrl());
         // 添加casFilter到shiroFilter中
         Map<String, Filter> filters = new HashMap<>();
         filters.put("casFilter", casFilter);
-        shiroFilterFactoryBean.setFilters(filters);
+        // 可以增加自定义的filter
+        filters.put("platFormFilter", new PlatFormFilter());
+        shiroFilterFactoryBean.getFilters().putAll(filters);
 
         loadShiroFilterChain(shiroFilterFactoryBean, casProperty);
         return shiroFilterFactoryBean;

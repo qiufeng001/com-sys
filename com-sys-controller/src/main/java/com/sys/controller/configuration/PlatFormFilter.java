@@ -19,10 +19,9 @@ import java.util.HashMap;
  * auther: kiven on 2018/9/7/007 16:11
  * try it bast!
  */
-@Component
-@ServletComponentScan
+//@Component
+//@ServletComponentScan
 @WebFilter(urlPatterns = "/*")
-
 public class PlatFormFilter implements Filter {
 
     @Override
