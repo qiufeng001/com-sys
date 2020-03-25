@@ -2,8 +2,6 @@ package com.sys.model.admin;
 
 import com.sys.model.base.entity.Dictionary;
 import com.sys.model.base.entity.Entity;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * User

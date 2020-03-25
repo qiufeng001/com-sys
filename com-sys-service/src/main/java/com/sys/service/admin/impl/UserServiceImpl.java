@@ -8,6 +8,7 @@ import com.sys.service.admin.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -16,19 +17,23 @@ import java.util.Map;
  * @author zhong.h
  * @date 2019/11/1
  */
-@SuppressWarnings("ALL")
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User, String> implements IUserService {
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
+
+    public UserServiceImpl() {
+        System.out.println("UserServiceImpl");
+
+    }
 
     @Override
     protected IRepository getRepository() {
-        return repository;
+        return userRepository;
     }
 
     public User findByParams(Map<String, Object> params) {
-        return repository.findByParam(params);
+        return userRepository.findByParam(params);
     }
 }

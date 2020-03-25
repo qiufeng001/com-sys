@@ -14,6 +14,8 @@ public abstract class AbstractCasProperty {
     private String shiroServerUrlPrefix;
     // casFilter UrlPattern
     private String casFilterUrlPattern;
+
+    private String shiroFilterUrlPattern;
     /*登录地址*/
     private String loginUrl;
     /*登出地址*/
@@ -93,5 +95,13 @@ public abstract class AbstractCasProperty {
 
     public void setUnauthorizedUrl(String unauthorizedUrl) {
         this.unauthorizedUrl = unauthorizedUrl;
+    }
+
+    public String getShiroFilterUrlPattern() {
+        return shiroFilterUrlPattern;
+    }
+
+    public void setShiroFilterUrlPattern(String shiroFilterUrlPattern) {
+        this.shiroFilterUrlPattern = shiroFilterUrlPattern;
     }
 }

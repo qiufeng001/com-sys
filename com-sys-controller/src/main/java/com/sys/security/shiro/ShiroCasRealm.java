@@ -3,6 +3,7 @@ package com.sys.security.shiro;
 import com.sys.model.admin.User;
 import com.sys.security.cas.CasProperty;
 import com.sys.service.admin.IUserService;
+import com.sys.service.admin.impl.UserServiceImpl;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.cas.CasAuthenticationException;
 import org.apache.shiro.cas.CasRealm;
@@ -88,8 +89,9 @@ public class ShiroCasRealm extends CasRealm {
 //            String username = (String) authc.getPrincipals().getPrimaryPrincipal();
 //            String tokens = (String) authc.getCredentials();
             Map<String, Object> map = new HashMap<>(16);
-            map.put("username", username);
-            IUserService userService = (IUserService) new AnnotationConfigApplicationContext().getBean("userService");
+            map.put("account", username);
+            AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(UserServiceImpl.class);
+            IUserService userService = (IUserService) context.getBean("userService");
             // 查询用户信息
             User user = userService.findByParams(map);
             // 账号不存在
