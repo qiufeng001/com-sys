@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * UserController
@@ -40,8 +43,11 @@ public class UserController extends BaseController<User, String> {
     @RequestMapping("test")
     @ResponseBody
     public String test() {
-        String url = casProperty.getCasLoginUrl();
-        return url;
+        Map<String, Object> map = new HashMap<>(16);
+        map.put("account", "root");
+        User user = service.findByParams(map);
+
+        return user.getAccount();
     }
 
     @RequestMapping("userInfo")

@@ -20,7 +20,7 @@ import java.util.HashMap;
  * try it bast!
  */
 //@Component
-//@ServletComponentScan
+@ServletComponentScan
 @WebFilter(urlPatterns = "/*")
 public class PlatFormFilter implements Filter {
 

@@ -11,7 +11,7 @@
 
 
     <sql id="colums_condition">
-		id,account,role_no,status
+		id,account,name,status
 	</sql>
 
     <sql id="condition">

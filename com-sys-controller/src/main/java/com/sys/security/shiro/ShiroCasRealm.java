@@ -3,7 +3,6 @@ package com.sys.security.shiro;
 import com.sys.model.admin.User;
 import com.sys.security.cas.CasProperty;
 import com.sys.service.admin.IUserService;
-import com.sys.service.admin.impl.UserServiceImpl;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.cas.CasAuthenticationException;
 import org.apache.shiro.cas.CasRealm;
@@ -15,6 +14,7 @@ import org.jasig.cas.client.validation.TicketValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
@@ -25,22 +25,19 @@ import java.util.Map;
  *
  * @author z.h
  */
+@Component
 public class ShiroCasRealm extends CasRealm {
-    // cas服务器地址
-    @Value("${cas-shiro.casServerUrlPrefix}")
-    public String casServerUrlPrefix;
-    // 登录成功地址
-    @Value("${cas-shiro.loginSuccessUrl}")
-    public String loginSuccessUrl;
 
     @Autowired
     private CasProperty casProperty;
+    @Autowired
+    private IUserService userService;
 
     @PostConstruct
     public void initProperty() {
-        super.setCasServerUrlPrefix(casServerUrlPrefix);
+        super.setCasServerUrlPrefix(casProperty.getCasServerUrlPrefix());
         // 客户端回调地址
-         setCasService(loginSuccessUrl);
+         setCasService(casProperty.getLoginSuccessUrl());
     }
 
     /**
@@ -90,8 +87,6 @@ public class ShiroCasRealm extends CasRealm {
 //            String tokens = (String) authc.getCredentials();
             Map<String, Object> map = new HashMap<>(16);
             map.put("account", username);
-            AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(UserServiceImpl.class);
-            IUserService userService = (IUserService) context.getBean("userService");
             // 查询用户信息
             User user = userService.findByParams(map);
             // 账号不存在
@@ -108,14 +103,5 @@ public class ShiroCasRealm extends CasRealm {
             e.printStackTrace();
             throw new CasAuthenticationException("Unable to validate ticket [" + ticket + "]", e);
         }
-    }
-
-    @Override
-    public void setCasServerUrlPrefix(String casServerUrlPrefix) {
-        this.casServerUrlPrefix = casServerUrlPrefix;
-    }
-
-    public void setLoginSuccessUrl(String loginSuccessUrl) {
-        this.loginSuccessUrl = loginSuccessUrl;
     }
 }

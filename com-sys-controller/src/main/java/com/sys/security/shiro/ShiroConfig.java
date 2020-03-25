@@ -33,19 +33,6 @@ import java.util.*;
 @Configuration
 public class ShiroConfig {
 
-    @Bean(name = "shiroCasRealm")
-    public ShiroCasRealm shiroCasRealm(EhCacheManager cacheManager, CasProperty casProperty) {
-        ShiroCasRealm realm = new ShiroCasRealm();
-//        realm.setAuthenticationCachingEnabled(false);
-        realm.setCacheManager(cacheManager);
-        realm.setCasServerUrlPrefix(casProperty.getCasServerUrlPrefix());
-        // 客户端回调地址
-        realm.setCasService(casProperty.getLoginSuccessUrl());
-        return realm;
-    }
-
-
-
     /**
      * 注册单点登出的listener
      * 优先级需要高于Cas的Filter

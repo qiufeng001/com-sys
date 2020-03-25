@@ -23,11 +23,6 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements IU
     @Autowired
     private UserRepository userRepository;
 
-    public UserServiceImpl() {
-        System.out.println("UserServiceImpl");
-
-    }
-
     @Override
     protected IRepository getRepository() {
         return userRepository;
