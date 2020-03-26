@@ -4,6 +4,7 @@ import com.sys.core.configuration.ApplicationBootStrap;
 //import net.unicon.cas.client.configuration.EnableCasClient;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -14,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @SpringBootApplication
 @EnableTransactionManagement // 事物注解
-//@EnableCasClient
+@ImportResource(locations={"classpath:conf/spring-redis.xml"})
 @ComponentScan(basePackages = {
         "com.sys.controller",
         "com.sys.security"
