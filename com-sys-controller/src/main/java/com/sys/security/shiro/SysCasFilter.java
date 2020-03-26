@@ -1,5 +1,6 @@
 package com.sys.security.shiro;
 
+import com.sys.core.util.CookieUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.cas.CasFilter;
 import org.apache.shiro.subject.Subject;
@@ -8,6 +9,8 @@ import org.apache.shiro.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
@@ -48,6 +51,15 @@ public class SysCasFilter extends CasFilter {
             throw new IllegalStateException("Success URL not available via saved request or via the successUrlFallback method parameter. One of these must be non-null for issueSuccessRedirect() to work.");
         } else {
             WebUtils.issueRedirect(request, response, successUrl, (Map)null, contextRelative);
+        }
+        HttpServletRequest servletRequest = (HttpServletRequest) request;
+        HttpServletResponse servletResponse = (HttpServletResponse) response;
+        // 这里往cookie中设置ticket
+        String queryString = servletRequest.getQueryString();
+        // 设置ticket
+        if(queryString != null && queryString.contains("ticket")){
+            String ticket = queryString.substring(queryString.indexOf("=") + 1);
+            CookieUtils.setCookie(servletRequest, servletResponse, ticket);
         }
     }
 }

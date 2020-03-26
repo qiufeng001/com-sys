@@ -33,8 +33,8 @@ public class CookieUtils {
      * @param token 登录成功后生产token，规则为：用户账号_sessionId_yyyyMMddhhmmss(faker_jofiwejgkjzjop+eeoj_dekokp_20181122174526)
      * @return
      */
-    public static void setCookie(HttpServletResponse response, HttpServletRequest request, String token) {
-        Cookie cookie = new Cookie("cas_token", token);
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String token) {
+        Cookie cookie = new Cookie("cas_ticket", token);
         cookie.setMaxAge(60 * 60 * 60);
 
         response.setHeader("Access-Control-Allow-Credentials", "true");
@@ -48,7 +48,7 @@ public class CookieUtils {
         String token = "";
         if(cookies != null && cookies.length > 0) {
             for(Cookie cookie : cookies){
-                if(cookie.getName().equals("cas_token")){
+                if(cookie.getName().equals("ticket")){
                     token = cookie.getValue();
                 }
             }
