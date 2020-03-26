@@ -128,7 +128,7 @@ public class ShiroConfig {
      */
     private void loadShiroFilterChain(ShiroFilterFactoryBean shiroFilterFactoryBean, CasProperty casProperty) {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
-        filterChainDefinitionMap.put(casProperty.getShiroFilterUrlPattern(), "casFilter");
+        filterChainDefinitionMap.put(casProperty.getCasFilterUrlPattern(), "casFilter");
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
         filterChainDefinitionMap.put("/fonts/**", "anon");
@@ -139,7 +139,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/files/**", "anon");
         filterChainDefinitionMap.put("/blog", "anon");
         filterChainDefinitionMap.put("/blog/open/**", "anon");
-//        filterChainDefinitionMap.put("/**", "authc");
+//        filterChainDefinitionMap.put( "/portal/**", "user");
         filterChainDefinitionMap.put("/**", "user");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
     }
@@ -148,14 +148,25 @@ public class ShiroConfig {
      * CAS过滤器
      *
      */
-    @Bean(name = "casFilter")
+   /* @Bean(name = "casFilter")
     public CasFilter getCasFilter(CasProperty casProperty) {
         CasFilter casFilter = new CasFilter();
         casFilter.setName("casFilter");
         casFilter.setEnabled(true);
         // 登录失败后跳转的URL，也就是 Shiro 执行 CasRealm 的 doGetAuthenticationInfo 方法向CasServer验证tiket
         casFilter.setFailureUrl(casProperty.getLoginUrl());// 我们选择认证失败后再打开登录页面
-        casFilter.setSuccessUrl(casProperty.getShiroServerUrlPrefix() + casProperty.getShiroFilterUrlPattern());
+        casFilter.setSuccessUrl(casProperty.getShiroServerUrlPrefix() + casProperty.getCasFilterUrlPattern());
+        return casFilter;
+    }*/
+
+    @Bean(name = "casFilter")
+    public SysCasFilter getCasFilter(CasProperty casProperty) {
+        SysCasFilter casFilter = new SysCasFilter();
+        casFilter.setName("casFilter");
+        casFilter.setEnabled(true);
+        // 登录失败后跳转的URL，也就是 Shiro 执行 CasRealm 的 doGetAuthenticationInfo 方法向CasServer验证tiket
+        casFilter.setFailureUrl(casProperty.getLoginUrl());// 我们选择认证失败后再打开登录页面
+        casFilter.setSuccessUrl(casProperty.getShiroServerUrlPrefix() + "/index");
         return casFilter;
     }
 
@@ -174,13 +185,13 @@ public class ShiroConfig {
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
         shiroFilterFactoryBean.setLoginUrl(casProperty.getLoginUrl());
         // 登录成功后要跳转的连接
-//    shiroFilterFactoryBean.setSuccessUrl(CasProp.loginSuccessUrl);
+        shiroFilterFactoryBean.setSuccessUrl(casProperty.getCasFilterUrlPattern());
         shiroFilterFactoryBean.setUnauthorizedUrl(casProperty.getShiroServerUrlPrefix() + casProperty.getUnauthorizedUrl());
         // 添加casFilter到shiroFilter中
         Map<String, Filter> filters = new HashMap<>();
         filters.put("casFilter", casFilter);
         // 可以增加自定义的filter
-        filters.put("platFormFilter", new PlatFormFilter());
+
         shiroFilterFactoryBean.getFilters().putAll(filters);
 
         loadShiroFilterChain(shiroFilterFactoryBean, casProperty);

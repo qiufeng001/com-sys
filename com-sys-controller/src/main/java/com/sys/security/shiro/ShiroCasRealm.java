@@ -12,8 +12,6 @@ import org.jasig.cas.client.validation.Assertion;
 import org.jasig.cas.client.validation.TicketValidationException;
 import org.jasig.cas.client.validation.TicketValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -76,15 +74,10 @@ public class ShiroCasRealm extends CasRealm {
             String url = casProperty.getShiroServerUrlPrefix() + casProperty.getCasFilterUrlPattern();
 
             //注意这里大坑，稍后说明
-            Assertion casAssertion = ticketValidator.validate(ticket, url);//"http://localhost:8080/index"
+            Assertion casAssertion = ticketValidator.validate(ticket, url);
             // get principal, user id and attributes
             AttributePrincipal casPrincipal = casAssertion.getPrincipal();
             String username = casPrincipal.getName();
-
-//            AuthenticationInfo authc = super.doGetAuthenticationInfo(token);
-//            if(authc==null) return null;
-//            String username = (String) authc.getPrincipals().getPrimaryPrincipal();
-//            String tokens = (String) authc.getCredentials();
             Map<String, Object> map = new HashMap<>(16);
             map.put("account", username);
             // 查询用户信息
