@@ -28,6 +28,24 @@ public class CookieUtils {
         return sessionId;
     }
 
+    /** 获取cookie中的sessionId
+     * @param request request请求域名
+     * @param cookieKey cookie的键值
+     * @return sessionId
+     */
+    public static String getValue(HttpServletRequest request, String cookieKey) {
+        Cookie[] cookies = request.getCookies();
+        String sessionId = "";
+        if(cookies != null) {
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals(cookieKey)){
+                    sessionId = cookie.getValue();
+                }
+            }
+        }
+        return sessionId;
+    }
+
     /**
      * 为实现 cookie + redis 单点登录，将 token 保存到 cookie 中
      * @param token 登录成功后生产token，规则为：用户账号_sessionId_yyyyMMddhhmmss(faker_jofiwejgkjzjop+eeoj_dekokp_20181122174526)
