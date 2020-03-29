@@ -1,8 +1,10 @@
 package com.sys.security.shiro;
 
 import com.sys.core.util.CookieUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.cas.CasFilter;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
@@ -11,6 +13,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 
@@ -61,5 +64,10 @@ public class SysCasFilter extends CasFilter {
             String ticket = queryString.substring(queryString.indexOf("=") + 1);
             CookieUtils.setCookie(servletRequest, servletResponse, ticket);
         }
+        HttpSession session = ((HttpServletRequest) request).getSession();
+        System.out.println("sessionID1：" + session.getId());
+        // 创建shiro绘画
+        Session session2 = SecurityUtils.getSubject().getSession();
+        System.out.println("sessionID2：" + session2.getId());
     }
 }

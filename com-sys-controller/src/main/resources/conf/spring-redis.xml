@@ -9,7 +9,7 @@
             http://www.springframework.org/schema/tx
             http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:property-placeholder location="classpath:application-env.properties"/>
+    <context:property-placeholder location="classpath:conf/redis.properties"/>
     <!-- jedis连接池 -->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxTotal" value="${jedis.maxTotal}"/>
@@ -24,7 +24,7 @@
             <bean class="com.sys.core.redis.CustomRedisFactoryBean">
                 <constructor-arg index="0" ref="jedisPoolConfig"/>
                 <constructor-arg index="1" value="115.28.106.80"/>
-                <constructor-arg index="2" value="${jedis.port.common}"/>
+                <constructor-arg index="2" value="${jedis.port}"/>
             </bean>
         </property>
     </bean>

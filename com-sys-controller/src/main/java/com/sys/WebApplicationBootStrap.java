@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @SpringBootApplication
 @EnableTransactionManagement // 事物注解
-@ImportResource(locations={"classpath:conf/spring-redis.xml"})
+//@ImportResource(locations={"classpath:conf/spring-redis.xml"})
 @ComponentScan(basePackages = {
         "com.sys.controller",
         "com.sys.security"
