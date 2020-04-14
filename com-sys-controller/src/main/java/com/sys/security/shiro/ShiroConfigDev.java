@@ -1,3 +1,4 @@
+/*
 package com.sys.security.shiro;
 
 import com.sys.security.cas.CasProperty;
@@ -32,9 +33,10 @@ public class ShiroConfigDev {
 
     private CasProperty casProperty;
     private RedisProperty redisProperty;
-    private ShiroCasRealm shiroCasRealm;
+//    private ShiroCasRealm shiroCasRealm;
 
-    /**
+    */
+/**
      * 注册单点登出filter
      * 设置单点退出的拦截器,在登录的时候，客户端会去服务端进行认证，此时认证成功之后，
      * 服务端会将地址和ST返回给客户端，而在此时该拦截器会将session跟ST绑定在一起，
@@ -47,7 +49,8 @@ public class ShiroConfigDev {
      * 此时Cas Client配置的SingleSignOutFilter将会使对应的Session失效，进而达到登出的目的。
      *
      * @return
-     */
+     *//*
+
     @Bean
     public FilterRegistrationBean singleSignOutFilter() {
         FilterRegistrationBean bean = new FilterRegistrationBean();
@@ -62,14 +65,16 @@ public class ShiroConfigDev {
         return bean;
     }
 
-    /**
+    */
+/**
      * 设置shiro的拦截器工厂类
      * 在设置拦截器的时候，需要先执行cas的拦截器，再执行shiro的拦截器
      *
      * @param securityManager
      * @param casFilter
      * @return
-     */
+     *//*
+
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultWebSecurityManager securityManager,
                                                             SysCasFilter casFilter) {
@@ -93,7 +98,8 @@ public class ShiroConfigDev {
         return shiroFilterFactoryBean;
     }
 
-    /**
+    */
+/**
      * 设置配置的触发的地方:用于设置shiro的拦截器，和将每一个拦截器的生命周期交给spring去管理
      * 注册DelegatingFilterProxy（Shiro）注册DelegatingFilterProxy(shiro)  是一个代理类，用于管理拦截器的生命周期，
      * 所有的请求都会拦截 ,在创建的时候，filter的执行会优先于bean的执行，所以需要使用该类先来管理bean
@@ -101,7 +107,8 @@ public class ShiroConfigDev {
      * 该步只是将当前的的生命周期交给了spring管理，具体的管理还是需要下面的LifecycleBeanPostProcessor的对象去进行操作
      *
      * @return
-     */
+     *//*
+
     @Bean
     public FilterRegistrationBean delegatingFilterProxy() {
         FilterRegistrationBean filterRegistration = new FilterRegistrationBean();
@@ -115,24 +122,28 @@ public class ShiroConfigDev {
         return filterRegistration;
     }
 
-    /**
+    */
+/**
      * 上面设置了声明周期，下面进行设置生命周期的自动化
      * 设置方法的自动初始化和销毁，init和destory方法被自动调用。
      * 注意，如果使用了该类，则不需要手动初始化方法和销毁方法，否则出错
      *
      * @return
-     */
+     *//*
+
     @Bean(name = "lifecycleBeanPostProcessor")
     public LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
     }
 
-    /**
+    */
+/**
      * 开启注解声明:
      * 开启shiro aop 的注解支持，使用代理的方式，所以需要开启代码的支持
      *
      * @return
-     */
+     *//*
+
     @Bean
     public DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
         DefaultAdvisorAutoProxyCreator proxyCreator = new DefaultAdvisorAutoProxyCreator();
@@ -141,12 +152,14 @@ public class ShiroConfigDev {
         return proxyCreator;
     }
 
-    /**
+    */
+/**
      * 开启注解声明:
      *
      * @param securityManager
      * @return
-     */
+     *//*
+
     @Bean
     public AuthorizationAttributeSourceAdvisor getAuthorizationAttributeSourceAdvisor(DefaultWebSecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
@@ -155,11 +168,13 @@ public class ShiroConfigDev {
     }
 
 
-    /**
+    */
+/**
      * 配置shiro redisManager
      * 使用的是shiro-redis开源插件
      * @return
-     */
+     *//*
+
     @Bean(name="redisManager")
     public RedisManager redisManager() {
         RedisManager redisManager = new RedisManager();
@@ -170,13 +185,15 @@ public class ShiroConfigDev {
         return redisManager;
     }
 
-    /**
+    */
+/**
      * 4
      * 让某个实例的某个方法的返回值注入为Bean的实例
      * Spring静态注入
      *
      * @return
-     */
+     *//*
+
     @Bean
     public MethodInvokingFactoryBean getMethodInvokingFactoryBean(CasProperty casProperty, RedisProperty redisProperty,
                                                                   ShiroCasRealm shiroCasRealm) {
@@ -187,11 +204,13 @@ public class ShiroConfigDev {
         return factoryBean;
     }
 
-    /**
+    */
+/**
      * 使用自定义redis缓存管理器
      * 解决redis中key为非字符串乱码问题
      * @return
-     */
+     *//*
+
     @Bean(name = "redisCacheManager")
     public RedisCacheManager redisCacheManager() {
         RedisCacheManager myRedisCacheManager = new RedisCacheManager();
@@ -201,10 +220,12 @@ public class ShiroConfigDev {
         return myRedisCacheManager;
     }
 
-    /**
+    */
+/**
      * RedisSessionDAO shiro sessionDao层的实现 通过redis
      * 使用的是shiro-redis开源插件
-     */
+     *//*
+
     @Bean
     public RedisSessionDAO redisSessionDAO() {
         RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
@@ -213,9 +234,11 @@ public class ShiroConfigDev {
         return redisSessionDAO;
     }
 
-    /**
+    */
+/**
      * shiro session的管理
-     */
+     *//*
+
     @Bean(name = "redisSessionManager")
     public DefaultWebSessionManager redisSessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
@@ -238,9 +261,11 @@ public class ShiroConfigDev {
         return sessionManager;
     }
 
-    /**
+    */
+/**
      * cookie 属性设置
-     */
+     *//*
+
     public SimpleCookie shrioCookie() {
         SimpleCookie cookie = new SimpleCookie("shiroCasCookie");
         //如果是单点登录，各个系统要设置相同的父域名public.com,否则会出现每进入一个子系统都会生成一个session，
@@ -250,16 +275,20 @@ public class ShiroConfigDev {
         cookie.setPath("/");
         //浏览器中通过document.cookie可以获取cookie属性，设置了HttpOnly=true,在脚本中就不能得到cookie，可以避免cookie被盗用
         cookie.setHttpOnly(casProperty.isHttpOnly());
-        /*maxAge=-1表示浏览器关闭时失效此Cookie*/
+        */
+/*maxAge=-1表示浏览器关闭时失效此Cookie*//*
+
         cookie.setMaxAge(24 * 60 * 60);
         return cookie;
     }
 
 
-    /**
+    */
+/**
      * @param
      * @return
-     */
+     *//*
+
     @Bean(name = "securityManager")
     public DefaultWebSecurityManager getDefaultWebSecurityManager() {
 
@@ -288,11 +317,13 @@ public class ShiroConfigDev {
         return jedisPool;
     }
 
-    /**
+    */
+/**
      * CAS过滤器
      *
      * @return
-     */
+     *//*
+
     @Bean(name = "casFilter")
     public SysCasFilter getCasFilter() {
         SysCasFilter casFilter = new SysCasFilter();
@@ -306,11 +337,13 @@ public class ShiroConfigDev {
         return casFilter;
     }
 
-    /**
+    */
+/**
      * 加载shiroFilter权限控制规则（从数据库读取然后配置）,角色/权限信息由MyShiroCasRealm对象提供doGetAuthorizationInfo实现获取来的
      *
      * @param shiroFilterFactoryBean
-     */
+     *//*
+
     private void loadShiroFilterChain(ShiroFilterFactoryBean shiroFilterFactoryBean) {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         // authc：该过滤器下的页面必须登录后才能访问，它是Shiro内置的一个拦截器org.apache.shiro.web.filter.authc.FormAuthenticationFilter
@@ -322,7 +355,8 @@ public class ShiroConfigDev {
         // url匹配通配符支持：? * **,分别表示匹配1个，匹配0-n个（不含子路径），匹配下级所有路径
 
         //1.shiro集成cas后，首先添加该规则
-        /*filterChainDefinitionMap.put("/", "casFilter");
+        */
+/*filterChainDefinitionMap.put("/", "casFilter");
         //2.不拦截的请求 对静态资源设置匿名访问
         filterChainDefinitionMap.put("/favicon.ico**", "anon");
         filterChainDefinitionMap.put("/css/**", "anon");
@@ -346,7 +380,8 @@ public class ShiroConfigDev {
         filterChainDefinitionMap.put("/user", "authc");
 
         //4.登录过的不拦截
-        filterChainDefinitionMap.put("/**", "authc");*/
+        filterChainDefinitionMap.put("/**", "authc");*//*
+
         filterChainDefinitionMap.put(casProperty.getCasFilterUrlPattern(), "casFilter");
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
@@ -370,3 +405,4 @@ public class ShiroConfigDev {
 
     }
 }
+*/
