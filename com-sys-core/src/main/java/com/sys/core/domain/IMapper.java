@@ -14,7 +14,7 @@ import java.util.Map;
  * @author zhong.h
  * @date 2019/10/31
  */
-public interface IRepository<T extends IEntity, K> {
+public interface IMapper<T extends IEntity, K> {
     public T findByPrimaryKey(K id);
 
     public T findByParam(@Param("params") Map<String, Object> params);

@@ -1,3 +1,4 @@
+/*
 package com.sys.security.shiro;
 
 import com.sys.security.cas.CasProperty;
@@ -41,22 +42,26 @@ import redis.clients.jedis.JedisPoolConfig;
 import javax.servlet.Filter;
 import java.util.*;
 
+*/
 /**
  * shiro权限中心
  *
  * @author z.h
- */
-@Configuration
+ *//*
+
+//@Configuration
 public class ShiroConfig {
 
     private CasProperty casProperty;
     private RedisProperty redisProperty;
     private ShiroCasRealm shiroCasRealm;
 
-    /**
+    */
+/**
      * 注册单点登出的listener
      * 优先级需要高于Cas的Filter
-     */
+     *//*
+
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public ServletListenerRegistrationBean<?> singleSignOutHttpSessionListener() {
@@ -66,11 +71,13 @@ public class ShiroConfig {
         return bean;
     }
 
-    /**
+    */
+/**
      * 登出过滤器
      *
      * @return
-     */
+     *//*
+
     @Bean
     public FilterRegistrationBean singleSignOutFilter() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
@@ -102,7 +109,8 @@ public class ShiroConfig {
         return aasa;
     }
 
-    /**
+    */
+/**
      * 解决： 无权限页面不跳转 shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorized") 无效
      * shiro的源代码ShiroFilterFactoryBean.Java定义的filter必须满足filter instanceof AuthorizationFilter，
      * 只有perms，roles，ssl，rest，port才是属于AuthorizationFilter，而anon，authcBasic，auchc，user是AuthenticationFilter，
@@ -110,7 +118,8 @@ public class ShiroConfig {
      * 并且默认并没有去处理或者捕获这些异常。在SpringMVC下需要配置捕获相应异常来通知用户信息
      *
      * @return
-     */
+     *//*
+
     @Bean
     public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
         SimpleMappingExceptionResolver simpleMappingExceptionResolver = new SimpleMappingExceptionResolver();
@@ -122,12 +131,14 @@ public class ShiroConfig {
         return simpleMappingExceptionResolver;
     }
 
-    /**
+    */
+/**
      * 加载shiroFilter权限控制规则（从数据库读取然后配置）
      *
      * @author SHANHY
      * @create 2016年1月14日
-     */
+     *//*
+
     private void loadShiroFilterChain(ShiroFilterFactoryBean shiroFilterFactoryBean) {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 //        filterChainDefinitionMap.put(casProperty.getCasFilterUrlPattern(), "casFilter");
@@ -148,22 +159,24 @@ public class ShiroConfig {
     }
 
     @Bean(name = "casFilter")
-    public SysCasFilter getCasFilter() {
-        SysCasFilter casFilter = new SysCasFilter();
+    public CustomCasFilter getCasFilter() {
+        CustomCasFilter casFilter = new CustomCasFilter();
         casFilter.setName("casFilter");
         casFilter.setEnabled(true);
         // 登录失败后跳转的URL，也就是 Shiro 执行 CasRealm 的 doGetAuthenticationInfo 方法向CasServer验证tiket
         casFilter.setFailureUrl(casProperty.getLoginUrl());// 我们选择认证失败后再打开登录页面
-        casFilter.setSuccessUrl(casProperty.getShiroServerUrlPrefix());
+        casFilter.setSuccessUrl(casProperty.getShiroServerUrlPrefix() + casProperty.getCasFilterUrlPattern());
         return casFilter;
     }
 
-    /**
+    */
+/**
      * 3
      * ShiroFilter<br/>
      * 注意这里参数中的 StudentService 和 IScoreDao 只是一个例子，因为我们在这里可以用这样的方式获取到相关访问数据库的对象，
      * 然后读取数据库相关配置，配置到 shiroFilterFactoryBean 的访问规则中。实际项目中，请使用自己的Service来处理业务逻辑。
-     */
+     *//*
+
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean getShiroFilterFactoryBean(CasProperty casProperty, RedisProperty redisProperty,
                                                             ShiroCasRealm shiroCasRealm) {
@@ -187,12 +200,14 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
     }
 
-    /**
+    */
+/**
      * 开启shiro aop注解支持.
      * 使用代理方式;所以需要开启代码支持;
      *
      * @return
-     */
+     *//*
+
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor() {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
@@ -200,11 +215,13 @@ public class ShiroConfig {
         return authorizationAttributeSourceAdvisor;
     }
 
-    /**
+    */
+/**
      * 配置shiro redisManager，可选
      *
      * @return
-     */
+     *//*
+
     @Bean
     public RedisManager getRedisManager() {
         RedisManager redisManager = new RedisManager();
@@ -215,13 +232,15 @@ public class ShiroConfig {
         return redisManager;
     }
 
-    /**
+    */
+/**
      * SessionDAO的作用是为Session提供CRUD并进行持久化的一个shiro组件
      * MemorySessionDAO 直接在内存中进行会话维护
      * EnterpriseCacheSessionDAO  提供了缓存功能的会话维护，默认情况下使用MapCache实现，内部使用ConcurrentHashMap保存缓存的会话。
      *
      * @return
-     */
+     *//*
+
     @Bean(name = "sessionDAO")
     public RedisSessionDAO getRedisSessionDAO() {
         RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
@@ -236,12 +255,14 @@ public class ShiroConfig {
     }
 
 
-    /**
+    */
+/**
      * cacheManager 缓存 redis实现，可选
      * 使用的是shiro-redis开源插件
      *
      * @return
-     */
+     *//*
+
     @Bean
     public RedisCacheManager rediscacheManager() {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
@@ -278,12 +299,14 @@ public class ShiroConfig {
         return jedisPool;
     }
 
-    /**
+    */
+/**
      * shiro缓存管理器;
      * 需要添加到securityManager中
      *
      * @return
-     */
+     *//*
+
     @Bean
     public RedisCacheManager cacheManager() {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
@@ -295,13 +318,15 @@ public class ShiroConfig {
         return redisCacheManager;
     }
 
-    /**
+    */
+/**
      * 4
      * 让某个实例的某个方法的返回值注入为Bean的实例
      * Spring静态注入
      *
      * @return
-     */
+     *//*
+
     @Bean
     public MethodInvokingFactoryBean getMethodInvokingFactoryBean() {
         MethodInvokingFactoryBean factoryBean = new MethodInvokingFactoryBean();
@@ -310,38 +335,44 @@ public class ShiroConfig {
         return factoryBean;
     }
 
-    /**
+    */
+/**
      * 配置session监听
      *
      * @return
-     */
+     *//*
+
     @Bean("sessionListener")
     public ShiroSessionListener sessionListener() {
         ShiroSessionListener sessionListener = new ShiroSessionListener();
         return sessionListener;
     }
 
-    /**
+    */
+/**
      * 配置会话ID生成器
      *
      * @return
-     */
+     *//*
+
     @Bean
     public SessionIdGenerator sessionIdGenerator() {
         return new JavaUuidSessionIdGenerator();
     }
 
-    /**
+    */
+/**
      * 配置保存sessionId的cookie
      * 注意：这里的cookie 不是上面的记住我 cookie 记住我需要一个cookie session管理 也需要自己的cookie
      * 默认为: JSESSIONID 问题: 与SERVLET容器名冲突,重新定义为sid
      *
      * @return
-     */
+     *//*
+
     @Bean("sessionIdCookie")
     public SimpleCookie sessionIdCookie() {
         //这个参数是cookie的名称
-        SimpleCookie simpleCookie = new SimpleCookie("sid");
+        SimpleCookie simpleCookie = new SimpleCookie("shiro:session:");
         //setcookie的httponly属性如果设为true的话，会增加对xss防护的安全系数。它有以下特点：
 
         //setcookie()的第七个参数
@@ -365,11 +396,13 @@ public class ShiroConfig {
         return hashedCredentialsMatcher;
     }
 
-    /**
+    */
+/**
      * 配置会话管理器，设定会话超时及保存
      *
      * @return
-     */
+     *//*
+
     @Bean("sessionManager")
     public SessionManager getDefaultWebSessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
@@ -404,3 +437,4 @@ public class ShiroConfig {
 
     }
 }
+*/

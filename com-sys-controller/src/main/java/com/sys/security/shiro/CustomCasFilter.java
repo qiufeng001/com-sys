@@ -1,3 +1,4 @@
+/*
 package com.sys.security.shiro;
 
 import com.sys.core.util.CookieUtils;
@@ -17,12 +18,14 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 
+*/
 /**
  * 重写CasFilter，这里是因为如果是GET请求的话，在cas登录的时候，使用的是get请求，因此会出现，你访问时用的路径就是shiro登录成功后访问的路径，
  *
  * @author zhong.h
- */
-public class SysCasFilter extends CasFilter {
+ *//*
+
+public class CustomCasFilter extends CasFilter {
 
     @Override
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) throws Exception {
@@ -41,10 +44,12 @@ public class SysCasFilter extends CasFilter {
         SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(request);
         // 这里如果是GET请求的话，在cas登录的时候，使用的是get请求，因此会出现，你访问时用的路径就是shiro登录成功后访问的路径，
         // 而不是自己设置的路径，因此注释这段代码，强制走自己设定的路径
-        /*if (savedRequest != null && savedRequest.getMethod().equalsIgnoreCase("GET")) {
+        */
+/*if (savedRequest != null && savedRequest.getMethod().equalsIgnoreCase("GET")) {
             successUrl = savedRequest.getRequestUrl();
             contextRelative = false;
-        }*/
+        }*//*
+
 
         if (successUrl == null) {
             successUrl = fallbackUrl;
@@ -71,3 +76,4 @@ public class SysCasFilter extends CasFilter {
         System.out.println("sessionID2：" + session2.getId());
     }
 }
+*/

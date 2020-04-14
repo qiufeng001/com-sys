@@ -1,8 +1,8 @@
 package com.sys.service.admin.impl;
 
-import com.sys.core.domain.IRepository;
+import com.sys.core.domain.IMapper;
 import com.sys.core.service.impl.BaseServiceImpl;
-import com.sys.domain.admin.UserRepository;
+import com.sys.domain.admin.UserMapper;
 import com.sys.model.admin.User;
 import com.sys.service.admin.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +20,14 @@ import java.util.Map;
 public class UserServiceImpl extends BaseServiceImpl<User, String> implements IUserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserMapper mapper;
 
     @Override
-    protected IRepository getRepository() {
-        return userRepository;
+    protected IMapper getMapper() {
+        return mapper;
     }
 
     public User findByParams(Map<String, Object> params) {
-        return userRepository.findByParam(params);
+        return mapper.findByParam(params);
     }
 }

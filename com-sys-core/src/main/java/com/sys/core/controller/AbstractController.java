@@ -16,11 +16,4 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public abstract class AbstractController {
 
 	protected Log logger = LogFactory.getLog(getClass());
-
-	protected abstract String getTemplateFolder();
-
-	@RequestMapping(value = "/")
-	public String index() {
-		return getTemplateFolder() + "/index";
-	}
 }

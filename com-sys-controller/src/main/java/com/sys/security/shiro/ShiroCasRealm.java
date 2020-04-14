@@ -1,3 +1,4 @@
+/*
 package com.sys.security.shiro;
 
 import com.sys.model.admin.User;
@@ -18,12 +19,14 @@ import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
+*/
 /**
  * cas授权与认证
  *
  * @author z.h
- */
-@Component
+ *//*
+
+//@Component
 public class ShiroCasRealm extends CasRealm {
 
     @Autowired
@@ -38,10 +41,13 @@ public class ShiroCasRealm extends CasRealm {
          setCasService(casProperty.getLoginSuccessUrl());
     }
 
-    /**
+    */
+/**
      * 这个方法用于加载权限
-     */
-    /*@Override
+     *//*
+
+    */
+/*@Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg) {
         User user = (User) super.getAvailablePrincipal(arg);
         MenuService menuService = new AnnotationConfigApplicationContext().getBean("munuService");
@@ -50,12 +56,15 @@ public class ShiroCasRealm extends CasRealm {
         info.setStringPermissions(perms);
         super.onLogout(arg);
         return info;
-    }*/
+    }*//*
 
 
-    /**
+
+    */
+/**
      * 这个方法用于认证用户身份
-     */
+     *//*
+
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         CasToken casToken = (CasToken) token;
@@ -98,3 +107,4 @@ public class ShiroCasRealm extends CasRealm {
         }
     }
 }
+*/

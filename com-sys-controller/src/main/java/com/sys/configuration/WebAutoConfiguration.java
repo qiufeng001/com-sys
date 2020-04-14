@@ -1,4 +1,4 @@
-package com.sys.controller.configuration;
+package com.sys.configuration;
 
 import com.sys.service.configuration.ServiceAutoConfig;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;

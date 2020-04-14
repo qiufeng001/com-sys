@@ -1,6 +1,6 @@
 package com.sys.core.service.impl;
 
-import com.sys.core.domain.IRepository;
+import com.sys.core.domain.IMapper;
 import com.sys.core.entity.BaseEntity;
 import com.sys.core.entity.IEntity;
 import com.sys.core.exception.ServiceException;
@@ -25,42 +25,42 @@ public abstract class BaseServiceImpl<T extends IEntity, K> implements IService<
 
     protected Log logger = LogFactory.getLog(getClass());
 
-    protected abstract IRepository<T, K> getRepository();
+    protected abstract IMapper<T, K> getMapper();
 
     @Override
     @Transactional(readOnly=true)
     public T findByPrimaryKey(K id) {
-        return getRepository().findByPrimaryKey(id);
+        return getMapper().findByPrimaryKey(id);
     }
 
     @Override
     @Transactional(readOnly=true)
     public T findByParam(Query query) {
-        return getRepository().findByParam(query.asMap());
+        return getMapper().findByParam(query.asMap());
     }
 
     @Override
     @Transactional(readOnly=true)
     public Integer selectCount(Query query) {
-        return getRepository().selectCount(query.asMap());
+        return getMapper().selectCount(query.asMap());
     }
 
     @Override
     @Transactional(readOnly=true)
     public List<T> selectByPage(Query query, Pagenation page) {
-        return getRepository().selectByPage(query.asMap(), page, query.getSort());
+        return getMapper().selectByPage(query.asMap(), page, query.getSort());
     }
 
     @Override
     @Transactional(readOnly=true)
     public List<T> selectByParams(Query query) {
-        return getRepository().selectByParams(query.asMap(), query.getSort());
+        return getMapper().selectByParams(query.asMap(), query.getSort());
     }
 
     @Override
     @Transactional(readOnly=false, isolation = Isolation.READ_COMMITTED, rollbackFor=Exception.class)
     public Integer insert(T entry) {
-        return getRepository().insert(entry);
+        return getMapper().insert(entry);
     }
 
     @Override
@@ -69,7 +69,7 @@ public abstract class BaseServiceImpl<T extends IEntity, K> implements IService<
         int count = 0;
         for (T entry : list) {
 
-            getRepository().insert(entry);
+            getMapper().insert(entry);
             count += 1;
         }
         return count;
@@ -78,25 +78,25 @@ public abstract class BaseServiceImpl<T extends IEntity, K> implements IService<
     @Override
     @Transactional(readOnly=false, isolation = Isolation.READ_COMMITTED, rollbackFor=Exception.class)
     public Integer update(T entry) {
-        return getRepository().update(entry);
+        return getMapper().update(entry);
     }
 
     @Override
     @Transactional(readOnly=false, isolation = Isolation.READ_COMMITTED, rollbackFor=Exception.class)
     public Integer deleteByParams(Query query) {
-        return getRepository().deleteByParams(query.asMap());
+        return getMapper().deleteByParams(query.asMap());
     }
 
     @Override
     @Transactional(readOnly=false, isolation = Isolation.READ_COMMITTED, rollbackFor=Exception.class)
     public Integer deleteByPrimaryKey(K id) {
-        return getRepository().deleteByPrimaryKey(id);
+        return getMapper().deleteByPrimaryKey(id);
     }
 
     @Override
     @Transactional(readOnly=true)
     public Integer validate(Query query) {
-        return getRepository().validate(query.asMap());
+        return getMapper().validate(query.asMap());
     }
 
     public Integer delete(T t) throws ServiceException {

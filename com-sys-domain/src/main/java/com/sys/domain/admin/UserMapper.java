@@ -1,6 +1,6 @@
 package com.sys.domain.admin;
 
-import com.sys.core.domain.IRepository;
+import com.sys.core.domain.IMapper;
 import com.sys.model.admin.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,6 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2019/10/31
  */
 @Mapper
-public interface UserRepository extends IRepository<User, String> {
+public interface UserMapper extends IMapper<User, String> {
 
 }

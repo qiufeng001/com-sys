@@ -1,13 +1,10 @@
-package com.sys.controller.configuration;
+package com.sys.configuration;
 
 import com.sys.core.configuration.AbstractWebMvcConfig;
-import com.sys.security.cas.CasProperty;
-import org.jasig.cas.client.authentication.AuthenticationFilter;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -38,5 +35,16 @@ public class WebMvcConfig extends AbstractWebMvcConfig {
 		filterRegistration.addInitParameter("useSession", "true");
 		filterRegistration.addInitParameter("redirectAfterValidation","true");
 		return filterRegistration;
+	}*/
+
+/*	@Bean
+	public CustomCasFilter getCasFilter() {
+		CustomCasFilter casFilter = new CustomCasFilter();
+		casFilter.setName("casFilter");
+		casFilter.setEnabled(true);
+		// 登录失败后跳转的URL，也就是 Shiro 执行 CasRealm 的 doGetAuthenticationInfo 方法向CasServer验证tiket
+		casFilter.setFailureUrl(casProperty.getLoginUrl());// 我们选择认证失败后再打开登录页面
+		casFilter.setSuccessUrl(casProperty.getShiroServerUrlPrefix() + casProperty.getCasFilterUrlPattern());
+		return casFilter;
 	}*/
 }

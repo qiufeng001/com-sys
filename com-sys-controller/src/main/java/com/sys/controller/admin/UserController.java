@@ -35,11 +35,6 @@ public class UserController extends BaseController<User, String> {
         return service;
     }
 
-    @Override
-    protected String getTemplateFolder() {
-        return "/admin/user";
-    }
-
     @RequestMapping("test")
     @ResponseBody
     public String test() {
