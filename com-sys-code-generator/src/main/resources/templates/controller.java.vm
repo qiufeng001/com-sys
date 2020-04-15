@@ -33,7 +33,7 @@ class ${table.controllerName}#if(${superControllerClass}) : ${superControllerCla
 
 #else
 #if(${superControllerClass})
-public class ${table.controllerName} extends ${superControllerClass}<${entity}, String> {
+public class ${table.controllerName} extends ${superControllerClass}<${entity}, ${componentType}> {
 #else
 public class ${table.controllerName} {
 #end

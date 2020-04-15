@@ -12,6 +12,7 @@ import com.baomidou.mybatisplus.generator.config.builder.ConfigBuilder;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.FileType;
 import com.baomidou.mybatisplus.generator.engine.AbstractTemplateEngine;
+import com.sys.code.utils.PropertiesUtils;
 import com.sys.core.util.CollectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -128,7 +129,7 @@ public abstract class AbstractCustomTemplateEngine {
      */
     public AbstractCustomTemplateEngine mkdirs() {
         getConfigBuilder().getPathInfo().forEach((key, value) -> {
-            if(!key.equals("xml_path")) {
+            if (!key.equals("xml_path")) {
                 File dir = new File(value);
                 if (!dir.exists()) {
                     boolean result = dir.mkdirs();
@@ -213,6 +214,7 @@ public abstract class AbstractCustomTemplateEngine {
         objectMap.put("superServiceImplClass", getSuperClassName(config.getSuperServiceImplClass()));
         objectMap.put("superControllerClassPackage", verifyClassPacket(config.getSuperControllerClass()));
         objectMap.put("superControllerClass", getSuperClassName(config.getSuperControllerClass()));
+        objectMap.put("componentType", new PropertiesUtils().getProperty().get("componentType"));
         return Objects.isNull(config.getInjectionConfig()) ? objectMap : config.getInjectionConfig().prepareObjectMap(objectMap);
     }
 
@@ -288,7 +290,7 @@ public abstract class AbstractCustomTemplateEngine {
     }
 
     private Map<String, String> getPackageInfo(CustomConfigBuilder config) {
-        Map<String,String> packageInfo = config.getPackageInfo();
+        Map<String, String> packageInfo = config.getPackageInfo();
         String moduleName = packageInfo.get("ModuleName");
         Map<String, String> map = CollectUtils.newHashMap();
         map.put("Entity", "com.sys.model." + moduleName);

@@ -22,7 +22,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 
 }
 #else
-public class ${table.serviceImplName} extends ${superServiceImplClass}<${entity}, String> implements ${table.serviceName} {
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${entity}, ${componentType}> implements ${table.serviceName} {
 
     @Autowired
     private ${table.mapperName} mapper;

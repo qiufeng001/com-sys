@@ -1,11 +1,10 @@
 package com.sys.domain.configuration;
 
-import com.sys.domain.admin.UserMapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan(basePackageClasses = { UserMapper.class })
+@MapperScan(basePackages = { "com.sys.domain.admin", "com.sys.domain.base" })
 public class DomainAutoConfig {
 
 	public DomainAutoConfig() {
