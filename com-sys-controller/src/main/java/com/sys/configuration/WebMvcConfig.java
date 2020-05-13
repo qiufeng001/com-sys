@@ -26,25 +26,4 @@ public class WebMvcConfig extends AbstractWebMvcConfig {
 		System.out.println("init web...");
 	}
 
-	/*@Bean
-	public FilterRegistrationBean authenticationFilter(CasProperty casProperty) {
-		FilterRegistrationBean filterRegistration = new FilterRegistrationBean();
-		filterRegistration.setFilter(new PlatFormFilter(casProperty));
-		filterRegistration.setEnabled(true);
-		filterRegistration.addUrlPatterns("/*");
-		filterRegistration.addInitParameter("useSession", "true");
-		filterRegistration.addInitParameter("redirectAfterValidation","true");
-		return filterRegistration;
-	}*/
-
-/*	@Bean
-	public CustomCasFilter getCasFilter() {
-		CustomCasFilter casFilter = new CustomCasFilter();
-		casFilter.setName("casFilter");
-		casFilter.setEnabled(true);
-		// 登录失败后跳转的URL，也就是 Shiro 执行 CasRealm 的 doGetAuthenticationInfo 方法向CasServer验证tiket
-		casFilter.setFailureUrl(casProperty.getLoginUrl());// 我们选择认证失败后再打开登录页面
-		casFilter.setSuccessUrl(casProperty.getShiroServerUrlPrefix() + casProperty.getCasFilterUrlPattern());
-		return casFilter;
-	}*/
 }

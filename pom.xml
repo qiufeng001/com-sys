@@ -147,21 +147,12 @@
             <version>1.18.10</version>
             <scope>provided</scope>
         </dependency>
-       <!-- <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring</artifactId>
-            <version>${shiro-cas.version}</version>
-        </dependency>
         <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-cas</artifactId>
-            <version>${shiro-cas.version}</version>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>5.2.0.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>org.crazycake</groupId>
-            <artifactId>shiro-redis</artifactId>
-            <version>3.2.3</version>
-        </dependency>-->
+
         <!-- 配置热部署-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -170,10 +161,4 @@
             <scope>runtime</scope>
         </dependency>
     </dependencies>
-   <!-- <repositories>
-        <repository>
-            <id>snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </repository>
-    </repositories>-->
 </project>
