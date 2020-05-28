@@ -1,7 +1,7 @@
 package com.sys.model.base;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.sys.model.base.entity.Entity;
+import com.sys.core.base.Entity;
 
 /**
  * <p>

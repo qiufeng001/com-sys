@@ -48,14 +48,14 @@
         #end
     #end
         #foreach($field in ${table.commonFields})##生成公共字段
-            <if test="params.${field.name} != null and params.${field.name} != ''">
-                and ${field.name} = #{params.${field.name}}
+            <if test="params.${field.propertyName} != null and params.${field.propertyName} != ''">
+                and ${field.name} = #{params.${field.propertyName}}
             </if>
         #end
     #foreach($field in ${table.fields})
         #if(!${field.keyFlag})##生成普通字段
-            <if test="params.${field.name} != null and params.${field.name} != ''">
-                and ${field.name} = #{params.${field.name}}
+            <if test="params.${field.propertyName} != null and params.${field.propertyName} != ''">
+                and ${field.name} = #{params.${field.propertyName}}
             </if>
         #end
     #end
@@ -141,17 +141,17 @@
     </delete>
 
     <insert id="insert" parameterType="${package.Entity}.${entity}">
-        INSERT INTO t_user
+        INSERT INTO ${table.name}
         <trim prefix="(" suffix=")" suffixOverrides=",">
     #foreach($field in ${table.fields})
         #if(${field.keyFlag})##生成主键排在第一位
-            <if test="params.${field.propertyName} != null">
+            <if test="${field.propertyName} != null">
                 ${field.name},
             </if>
         #end
     #end
         #foreach($field in ${table.commonFields})##生成公共字段
-            <if test="params.${field.propertyName} != null">
+            <if test="${field.propertyName} != null">
                 ${field.name},
             </if>
         #end
@@ -167,19 +167,19 @@
         #foreach($field in ${table.fields})
         #if(${field.keyFlag})##生成主键排在第一位
             <if test="${field.propertyName} != null">
-                #{${field.name}},
+                #{${field.propertyName}},
             </if>
         #end
         #end
         #foreach($field in ${table.commonFields})##生成公共字段
             <if test="${field.propertyName} != null">
-                #{${field.name}},
+                #{${field.propertyName}},
             </if>
         #end
     #foreach($field in ${table.fields})
         #if(!${field.keyFlag})##生成普通字段
             <if test="${field.propertyName} != null">
-                #{${field.name}},
+                #{${field.propertyName}},
             </if>
         #end
     #end

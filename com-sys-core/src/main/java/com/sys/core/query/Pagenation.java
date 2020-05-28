@@ -17,7 +17,7 @@ public class Pagenation implements Serializable {
 	/**
 	 * 每页数量
 	 */
-	private int rows = 10;
+	private int pageSize = 10;
 
 	/**
 	 * 当前页码
@@ -28,6 +28,7 @@ public class Pagenation implements Serializable {
 	 * 记录总数
 	 */
 	private long total;
+
 	/**
 	 * 页总数
 	 */
@@ -44,15 +45,15 @@ public class Pagenation implements Serializable {
 	 */
 	public Pagenation(int pageIndex, int pageSize) {
 		this.pageIndex = pageIndex;
-		this.rows = pageSize;
+		this.pageSize = pageSize;
 	}
 
-	public int getRows() {
-		return rows;
+	public int getPageSize() {
+		return pageSize;
 	}
 
-	public void setRows(int rows) {
-		this.rows = rows;
+	public void setPageSize(int rows) {
+		this.pageSize = rows;
 	}
 
 	public int getPageIndex() {
@@ -77,7 +78,7 @@ public class Pagenation implements Serializable {
 
 	public void setTotal(long total) {
 		this.total = total;
-		this.pageCount = (int) Math.ceil(total / rows);
+		this.pageCount = (int) Math.ceil(total / pageSize);
 	}
 
 	public int getPageCount() {
@@ -85,11 +86,11 @@ public class Pagenation implements Serializable {
 	}
 
 	public long getStartRowNum() {
-		return (pageIndex - 1) * rows;
+		return (pageIndex - 1) * pageSize;
 	}
 
 	@Override
 	public String toString() {
-		return "pageSize：" + this.rows + " pageIndex:" + this.pageIndex + " total:" + this.total + " pageCount" + this.pageCount;
+		return "pageSize：" + this.pageSize + " pageIndex:" + this.pageIndex + " total:" + this.total + " pageCount" + this.pageCount;
 	}
 }

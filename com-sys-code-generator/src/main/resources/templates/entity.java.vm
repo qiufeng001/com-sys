@@ -30,14 +30,11 @@ import lombok.experimental.Accessors;
   #end
 @Accessors(chain = true)
 #end
-#if(${table.convert})
-@TableName("${table.name}")
-#end
 #if(${swagger2})
 @ApiModel(value="${entity}对象", description="$!{table.comment}")
 #end
 #if(${superEntityClass})
-public class ${entity} extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
+public class ${entity} extends ${superEntityClass}<${entity}> {
 #elseif(${activeRecord})
 public class ${entity} extends Model<${entity}> {
 #else

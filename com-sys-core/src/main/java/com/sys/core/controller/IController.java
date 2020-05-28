@@ -5,6 +5,7 @@ import com.sys.core.query.PageResult;
 import com.sys.core.query.Pagenation;
 import com.sys.core.query.Query;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -15,9 +16,9 @@ import java.util.List;
  */
 public interface IController <T extends IEntity, K> {
 
-    public T create(T entity);
+    public T create(T entity, HttpServletRequest request);
 
-    public T update(T entity);
+    public T update(T entity, HttpServletRequest request);
 
     public Integer deleteByParams(Query query);
 

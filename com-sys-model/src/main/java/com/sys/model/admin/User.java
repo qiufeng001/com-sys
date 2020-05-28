@@ -1,7 +1,7 @@
 package com.sys.model.admin;
 
 import com.sys.model.base.entity.Dictionary;
-import com.sys.model.base.entity.Entity;
+import com.sys.core.base.Entity;
 
 /**
  * User

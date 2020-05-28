@@ -1,9 +1,16 @@
 package com.sys.domain.admin;
 
-import com.sys.core.domain.IMapper;
 import com.sys.model.admin.Menu;
-import org.apache.ibatis.annotations.Mapper;
+import com.sys.core.domain.IMapper;
 
-@Mapper
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author zhong.h
+ * @since 2020-05-27
+ */
 public interface MenuMapper extends IMapper<Menu, String> {
+
 }

@@ -106,7 +106,7 @@ public class CodeGeneratorExecute {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass("com.sys.model.base.entity.Entity");
+        strategy.setSuperEntityClass("com.sys.core.base.Entity");
         strategy.setEntityLombokModel(false);
         strategy.setRestControllerStyle(true);
         // 公共父类控制层

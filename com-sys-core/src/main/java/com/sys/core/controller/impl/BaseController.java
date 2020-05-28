@@ -16,6 +16,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -82,17 +83,17 @@ public abstract class BaseController<T extends IEntity, K> extends AbstractContr
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST, value = "/create")
     @Override
-    public T create(T entry) {
-        getService().insert(entry);
+    public T create(T entry, HttpServletRequest request) {
+        getService().insert(entry, request);
         return entry;
     }
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST, value = "/update")
     @Override
-    public T update(T entry) throws JsonManagerException {
+    public T update(T entry, HttpServletRequest request) throws JsonManagerException {
         try {
-            getService().update(entry);
+            getService().update(entry, request);
             return entry;
         } catch (ServiceException e) {
             throw new JsonManagerException(e);
@@ -121,8 +122,8 @@ public abstract class BaseController<T extends IEntity, K> extends AbstractContr
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST, value = "/batchsave")
-    public Integer batchSave(DataChangeEntry<T> datas) {
-        return getService().batchSave(datas.getInserted(), datas.getUpdated(), datas.getDeleted());
+    public Integer batchSave(DataChangeEntry<T> datas, HttpServletRequest request) {
+        return getService().batchSave(datas.getInserted(), datas.getUpdated(), datas.getDeleted(), request);
     }
 
 

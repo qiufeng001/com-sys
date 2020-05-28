@@ -8,22 +8,30 @@ import java.util.Date;
  * @author zhong.h
  * @date 2019/10/31
  */
-public interface IEntity<T> {
+public interface IEntity<K> {
     // id 主键
-    T getId();
+    K getId();
 
-    void setId(T val);
+    void setId(K val);
 
     // 名称
     void setName(String name);
 
     String getName();
     // 创建时间
-    Date getCreatedDate();
+    Date getCreateTime();
 
-    void setCreatedDate(Date date);
+    void setCreateTime(Date date);
     // 修改时间
-    Date getUpdatedDate();
+    Date getUpdateTime();
 
-    void setUpdatedDate(Date date);
+    void setUpdateTime(Date date);
+
+    String getCreateUser();
+
+    void setCreateUser(String createUser);
+
+    String getUpdateUser();
+
+    void setUpdateUser(String updateUser);
 }

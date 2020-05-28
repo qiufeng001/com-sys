@@ -5,6 +5,7 @@ import com.sys.core.exception.ServiceException;
 import com.sys.core.query.Pagenation;
 import com.sys.core.query.Query;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -25,11 +26,11 @@ public interface IService <T extends IEntity, K> {
 
     public List<T> selectByParams(Query query);
 
-    public Integer insert(T entry);
+    public Integer insert(T entry, HttpServletRequest request);
 
     public Integer batchesInsert(List<T> list);
 
-    public Integer update(T entry);
+    public Integer update(T entry, HttpServletRequest request);
 
     public Integer deleteByParams(Query query);
 
@@ -37,5 +38,5 @@ public interface IService <T extends IEntity, K> {
 
     public Integer validate(Query query);
 
-    public Integer batchSave(List<T> inserted, List<T> updated, List<T> deleted) throws ServiceException;
+    public Integer batchSave(List<T> inserted, List<T> updated, List<T> deleted, HttpServletRequest request);
 }

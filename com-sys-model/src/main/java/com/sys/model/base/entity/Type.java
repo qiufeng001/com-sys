@@ -1,6 +1,8 @@
 package com.sys.model.base.entity;
 
 
+import com.sys.core.base.Entity;
+
 /**
  * 基础数据 - 类型
  *

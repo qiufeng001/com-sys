@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.domain.base.SysGroupsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.sys.model.base.SysGroups">
+        <result column="ID" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="colums_condition">
+        ID,
+    name, code
+    </sql>
+
+    <sql id="condition">
+        <if test="null!=params">
+            <if test="null!=params.queryCondition and ''!=params.queryCondition">
+                And ${params.queryCondition}
+            </if>
+            <if test="params.ID != null and params.ID != ''">
+                and ID = #{params.ID}
+            </if>
+            <if test="params.name != null and params.name != ''">
+                and name = #{params.name}
+            </if>
+            <if test="params.code != null and params.code != ''">
+                and code = #{params.code}
+            </if>
+        </if>
+    </sql>
+
+    <sql id="uniqe_condition">
+        1=1
+        <if test="null!=id and ''!=id">
+            AND id=#{id}
+        </if>
+    </sql>
+
+    <select id="findByPrimaryKey" resultMap="BaseResultMap">
+        SELECT
+        <include refid="colums_condition"/>
+        FROM
+        t_sys_groups
+        WHERE id = #{id};
+    </select>
+
+    <select id="findByUnique" resultMap="BaseResultMap">
+        SELECT
+        <include refid="colums_condition"/>
+        FROM t_sys_groups
+        WHERE
+        <include refid="uniqe_condition"/>
+        limit 1
+    </select>
+
+    <select id="findByParam" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        <include refid="colums_condition"/>
+        FROM t_sys_groups
+        WHERE 1=1
+        <include refid="condition"/>
+        LIMIT #{page.startRowNum} ,#{page.pageSize}
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer">
+        SELECT COUNT(1) as s FROM t_sys_groups WHERE 1=1
+        <include refid="condition"/>
+    </select>
+
+    <select id="selectByPage" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        <include refid="colums_condition"/>
+        FROM t_sys_groups WHERE 1=1
+        <include refid="condition"/>
+        <if test="orderby != null and ''!=orderby">
+            ORDER BY ${orderby}
+        </if>
+        LIMIT #{page.startRowNum} ,#{page.pageSize}
+    </select>
+
+    <select id="selectByParams" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        <include refid="colums_condition"/>
+        FROM t_sys_groups t
+        where 1=1
+        <include refid="condition"/>
+    </select>
+
+    <delete id="deleteByPrimaryKey">
+		DELETE FROM t_sys_groups
+		WHERE id = #{id}
+	</delete>
+
+    <delete id="deleteByUnique">
+        DELETE FROM t_sys_groups
+        WHERE
+        <include refid="uniqe_condition"/>
+    </delete>
+
+    <delete id="deleteByParams" parameterType="map">
+        DELETE
+        FROM t_sys_groups
+        WHERE 1=1
+        <include refid="condition"/>
+        <if test="params.ids != null">
+            AND id in ( ${params.ids} )
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.sys.model.base.SysGroups">
+        INSERT INTO t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="params.id != null">
+                ID,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{ID},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="code != null">
+                #{code},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.sys.model.base.SysGroups">
+        UPDATE t_sys_groups
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="code != null">
+                code = #{code},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    <!-- auto generate end -->
+</mapper>
