@@ -11,8 +11,10 @@
         <package name="com-sys-model" />
     </typeAliases>
     <mappers>
-        <!-- 基础类 -->
+        <!-- 基础管理 -->
         <mapper resource="mapper/admin/UserMapper.xml"/>
         <mapper resource="mapper/admin/MenuMapper.xml"/>
+
+        <mapper resource="mapper/base/CommonMapper.xml"/>
     </mappers>
 </configuration>

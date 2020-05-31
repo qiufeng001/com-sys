@@ -51,7 +51,7 @@ public class CasValidateController {
         return reuslt;
     }
 
-    @RequestMapping("/rediectToReact")
+    @RequestMapping("/redirectToReact")
     public void rediectToReact(HttpServletResponse response, HttpServletRequest request) {
         try {
             response.sendRedirect(casProperty.getShiroServerUrlPrefix());

@@ -33,7 +33,7 @@ public interface IMapper<T extends IEntity, K> {
 
     public Integer update(T entry);
 
-    public Integer deleteByParams(@Param("params") Map<String, Object> params);
+    public Integer deleteByParams(@Param("ids") List<String> ids);
 
     public Integer deleteByPrimaryKey(K id);
 

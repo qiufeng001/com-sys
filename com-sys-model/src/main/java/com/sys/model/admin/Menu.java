@@ -16,6 +16,8 @@ public class Menu extends Entity {
 
     private static final long serialVersionUID=1L;
 
+    private String code;
+
     private Integer status;
 
     private String pId;
@@ -24,6 +26,13 @@ public class Menu extends Entity {
 
     private String sequence;
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public Integer getStatus() {
         return status;

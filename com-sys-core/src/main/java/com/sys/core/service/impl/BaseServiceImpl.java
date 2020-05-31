@@ -1,5 +1,6 @@
 package com.sys.core.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.sys.core.base.Entity;
 import com.sys.core.domain.IMapper;
 import com.sys.core.entity.BaseEntity;
@@ -8,6 +9,7 @@ import com.sys.core.exception.ServiceException;
 import com.sys.core.query.Pagenation;
 import com.sys.core.query.Query;
 import com.sys.core.service.IService;
+import com.sys.core.util.CollectUtils;
 import com.sys.core.util.UUIDUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -129,7 +132,19 @@ public abstract class BaseServiceImpl<T extends IEntity, K> implements IService<
     @Transactional(readOnly=false, isolation = Isolation.READ_COMMITTED, rollbackFor=Exception.class)
     public Integer deleteByParams(Query query) {
         try {
-            return getMapper().deleteByParams(query.asMap());
+            Map<String, Object> map = query.asMap();
+            String idsStr = (String) map.get("ids");
+            if(StringUtils.isNotBlank(idsStr)) {
+                List<String> ids = CollectUtils.newArrayList();
+                String[] idStrArr = idsStr.split(",");
+                for(int i = 0;i < idStrArr.length;i++) {
+                    ids.add(idStrArr[i].toString());
+                }
+                return getMapper().deleteByParams(ids);
+            }else {
+                return 0;
+            }
+
         } catch (Exception e) {
             throw new ServiceException(e);
         }
