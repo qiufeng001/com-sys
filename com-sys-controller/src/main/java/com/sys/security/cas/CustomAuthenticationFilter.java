@@ -147,7 +147,7 @@ public class CustomAuthenticationFilter extends AbstractCasFilter {
 
         response.setContentType("application/json; charset=UTF-8");
         Map<String, Integer> resultMap = CollectUtils.newHashMap();
-        resultMap.put("msg", 1001);
+        resultMap.put("code", 1001);
         out.println(JSON.toJSONString(resultMap));
         //this.authenticationRedirectStrategy.redirect(request, response, urlToRedirectTo);
     }
