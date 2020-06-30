@@ -35,7 +35,7 @@ public interface IMapper<T extends IEntity, K> {
 
     public Integer deleteByParams(@Param("ids") List<String> ids);
 
-    public Integer deleteByPrimaryKey(K id);
+    public Integer deleteByPrimaryKey(String id);
 
     /**
      * 验证

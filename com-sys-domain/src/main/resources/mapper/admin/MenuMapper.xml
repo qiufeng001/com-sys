@@ -222,7 +222,7 @@
                 name = #{name},
             </if>
             <if test="code != null">
-                name = #{code},
+                code = #{code},
             </if>
             <if test="status != null">
                 status = #{status},

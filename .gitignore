@@ -21,3 +21,11 @@
 *.rar
 
 hs_err_pid*
+/com-sys/target/
+/com-sys-code-generator/target/
+/com-sys-core/target/
+/com-sys-domain/target/
+/com-sys-model/target/
+/com-sys-service/target/
+
+

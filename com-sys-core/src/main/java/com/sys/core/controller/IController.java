@@ -22,7 +22,7 @@ public interface IController <T extends IEntity, K> {
 
     public Integer deleteByParams(Query query);
 
-    public Integer deleteByPrimaryKey(K id);
+    public Integer deleteByPrimaryKey(String id);
 
     public T findByParam(Query query);
 

@@ -116,7 +116,7 @@ public abstract class BaseController<T extends IEntity, K> extends AbstractContr
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST, value = "/delete/{id}")
     @Override
-    public Integer deleteByPrimaryKey(@PathVariable("id") K id) {
+    public Integer deleteByPrimaryKey(@PathVariable("id") String id) {
         return getService().deleteByPrimaryKey(id);
     }
 

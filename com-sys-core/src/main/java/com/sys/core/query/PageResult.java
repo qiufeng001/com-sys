@@ -9,7 +9,7 @@ public class PageResult<T> implements Serializable {
 
 	private List<T> rows;
 	
-	private long total;
+		private long total;
 	
 	public PageResult(List<T> rows, long total) {
 		this.rows = rows;

@@ -2,7 +2,10 @@ package com.sys.model.admin;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
+import java.util.List;
+
 import com.sys.core.base.Entity;
+import com.sys.core.util.CollectUtils;
 
 /**
  * <p>
@@ -25,6 +28,8 @@ public class Menu extends Entity {
     private String url;
 
     private String sequence;
+
+    private List<Menu> childMenus = CollectUtils.newArrayList();
 
     public String getCode() {
         return code;
@@ -64,5 +69,13 @@ public class Menu extends Entity {
 
     public void setSequence(String sequence) {
         this.sequence = sequence;
+    }
+
+    public List<Menu> getChildMenus() {
+        return childMenus;
+    }
+
+    public void setChildMenus(List<Menu> childMenus) {
+        this.childMenus = childMenus;
     }
 }

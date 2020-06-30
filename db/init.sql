@@ -58,11 +58,11 @@ CREATE TABLE `t_menu` (
   `update_user` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO t_menu (`id`, `name`, `pid`, `url`, `img`, `status`, `sequence`, `create_user`, `update_user`, `create_time`, `update_time`) VALUES ('001', '设置', '0', NULL, 'ww', '1', '1', 'w', '2w', '2018-06-25', '2018-06-25');
-INSERT INTO t_menu (`id`, `name`, `pid`, `url`, `img`, `status`, `sequence`, `create_user`, `update_user`, `create_time`, `update_time`) VALUES ('001001', '用户基本信息', '001', '/user/detail', 'w', '1', '2', '2', '2', '2018-06-11', '2018-06-25');
-INSERT INTO t_menu (`id`, `name`, `pid`, `url`, `img`, `status`, `sequence`, `create_user`, `update_user`, `create_time`, `update_time`) VALUES ('001002', '密码修改', '001', '/user/updatePwd', 'w', '1', '3', 'w', 'w', '2018-06-25', '2018-06-25');
-INSERT INTO t_menu (`id`, `name`, `pid`, `url`, `img`, `status`, `sequence`, `create_user`, `update_user`, `create_time`, `update_time`) VALUES ('001003', '菜单管理', '001', '/menu/index', 'e', '1', '4', 'admin', 'admin', '2018-06-29', '2018-06-29');
-INSERT INTO t_menu (`id`, `name`, `pid`, `url`, `img`, `status`, `sequence`, `create_user`, `update_user`, `create_time`, `update_time`) VALUES ('002', '报表', '0', NULL, '3', '1', '5', '2', '2', '2018-06-26', '2018-06-26');
+INSERT INTO t_menu (`id`, `name`, `pid`, `url`, `status`, `sequence`, `create_user`, `update_user`, `create_time`, `update_time`) VALUES ('hiogarehihdsioafhds1i9398eu8tut', '设置', '0', NULL, 'ww', '1', '1', 'w', '2w', '2018-06-25', '2018-06-25');
+INSERT INTO t_menu (`id`, `name`, `pid`, `url`, `status`, `sequence`, `create_user`, `update_user`, `create_time`, `update_time`) VALUES ('001001', '用户基本信息', '001', '/user/detail', 'w', '1', '2', '2', '2', '2018-06-11', '2018-06-25');
+INSERT INTO t_menu (`id`, `name`, `pid`, `url`,  `status`, `sequence`, `create_user`, `update_user`, `create_time`, `update_time`) VALUES ('001002', '密码修改', '001', '/user/updatePwd', 'w', '1', '3', 'w', 'w', '2018-06-25', '2018-06-25');
+INSERT INTO t_menu (`id`, `name`, `pid`, `url`, `status`, `sequence`, `create_user`, `update_user`, `create_time`, `update_time`) VALUES ('001003', '菜单管理', '001', '/menu/index', 'e', '1', '4', 'admin', 'admin', '2018-06-29', '2018-06-29');
+INSERT INTO t_menu (`id`, `name`, `pid`, `url`,  `status`, `sequence`, `create_user`, `update_user`, `create_time`, `update_time`) VALUES ('002', '报表', '0', NULL, '3', '1', '5', '2', '2', '2018-06-26', '2018-06-26');
 INSERT INTO t_menu (`id`, `name`, `pid`, `url`, `img`, `status`, `sequence`, `create_user`, `update_user`, `create_time`, `update_time`) VALUES ('002001', '日报', '002', '/report/dayReport', 'e', '1', '6', '5', '5', '2018-06-26', '2018-06-26');
 
 -- 菜单角色

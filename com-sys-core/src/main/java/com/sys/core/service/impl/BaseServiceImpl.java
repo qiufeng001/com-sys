@@ -115,7 +115,7 @@ public abstract class BaseServiceImpl<T extends IEntity, K> implements IService<
     @Transactional(readOnly=false, isolation = Isolation.READ_COMMITTED, rollbackFor=Exception.class)
     public Integer update(T entry, HttpServletRequest request) {
         try {
-            BaseEntity<K> item = (BaseEntity<K>) entry;
+            Entity item = (Entity) entry;
             AttributePrincipal principal = (AttributePrincipal) request.getUserPrincipal();;
             if (principal != null) {
                 item.setUpdateUser(principal.getName());
@@ -152,7 +152,7 @@ public abstract class BaseServiceImpl<T extends IEntity, K> implements IService<
 
     @Override
     @Transactional(readOnly=false, isolation = Isolation.READ_COMMITTED, rollbackFor=Exception.class)
-    public Integer deleteByPrimaryKey(K id) {
+    public Integer deleteByPrimaryKey(String id) {
         try {
             return getMapper().deleteByPrimaryKey(id);
         } catch (Exception e) {
@@ -173,9 +173,9 @@ public abstract class BaseServiceImpl<T extends IEntity, K> implements IService<
     public Integer delete(T t) throws ServiceException {
         try {
             @SuppressWarnings("unchecked")
-            BaseEntity<K> entry = (BaseEntity<K>) t;
-            if (entry.getId() != null && !"".equals(entry.getId())) {
-                return this.deleteByPrimaryKey(entry.getId());
+            Entity item = (Entity) t;
+            if (item.getId() != null && !"".equals(item.getId())) {
+                return this.deleteByPrimaryKey(item.getId());
             }
             return 0;
         } catch (Exception e) {

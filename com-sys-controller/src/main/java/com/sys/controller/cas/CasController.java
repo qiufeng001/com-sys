@@ -1,15 +1,11 @@
 package com.sys.controller.cas;
 
 import com.sys.core.configuration.Config;
-import com.sys.core.inspect.ExecutionContext;
 import com.sys.core.util.CollectUtils;
 import com.sys.core.util.CookieUtils;
-import com.sys.model.admin.User;
 import com.sys.security.cas.CasProperty;
-import com.sys.util.HttpClientPostFs;
-import org.apache.commons.lang3.StringUtils;
 import org.jasig.cas.client.authentication.AttributePrincipal;
-import org.jasig.cas.client.validation.AssertionImpl;
+import org.jasig.cas.client.util.AbstractCasFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 
@@ -27,18 +24,33 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/cas/*")
-public class CasValidateController {
+public class CasController {
 
     @Autowired
     private CasProperty casProperty;
 
-    @RequestMapping("/isLogin")
+
+    /**
+     * cas 服务端配置了单点退出配置
+     *
+     * @param session
+     * @param response
+     */
+    @RequestMapping("/logout")
     @ResponseBody
-    public Map<String, Object> casIsLogin(HttpServletRequest request, HttpServletResponse response) {
-        Map<String, Object> reuslt = CollectUtils.newHashMap();
-        reuslt.put("isLogin", true);
-        reuslt.put(Config.CAS_TICKET, CookieUtils.getValue(request, Config.CAS_TICKET));
-        return reuslt;
+    public void casIsLogin(HttpSession session, HttpServletResponse response) {
+        // 退出业务
+        session.removeAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
+        session.invalidate();
+        try {
+            // 重定向到登录页
+            Thread.sleep(1000);
+            response.sendRedirect(casProperty.getLogoutUrl() + "?service=" + casProperty.getShiroServerUrlPrefix());
+        }catch (IOException e) {
+            e.getMessage();
+        }catch (InterruptedException e2) {
+            e2.getMessage();
+        }
     }
 
     @RequestMapping("/loginUser")
