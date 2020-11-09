@@ -42,7 +42,7 @@ public class Menu extends Entity {
     public Integer getStatus() {
         return status;
     }
-
+        
     public void setStatus(Integer status) {
         this.status = status;
     }

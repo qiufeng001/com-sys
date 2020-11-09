@@ -4,7 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan(basePackages = { "com.sys.domain.admin", "com.sys.domain.base" })
+@MapperScan(basePackages = { "com.sys.domain" })
 public class DomainAutoConfig {
 
 	public DomainAutoConfig() {

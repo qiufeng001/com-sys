@@ -16,5 +16,6 @@
         <mapper resource="mapper/admin/MenuMapper.xml"/>
 
         <mapper resource="mapper/base/CommonMapper.xml"/>
+        <mapper resource="mapper/basecode/MaterialsMapper.xml"/>
     </mappers>
 </configuration>
