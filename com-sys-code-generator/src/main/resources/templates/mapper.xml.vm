@@ -131,7 +131,7 @@
     </delete>
 
     <delete id="deleteByParams" parameterType="map">
-        <if test="params.ids != null">
+        <if test="ids != null">
             DELETE
             FROM ${table.name}
             <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
@@ -141,7 +141,7 @@
     </delete>
 
     <insert id="insert" parameterType="${package.Entity}.${entity}">
-        INSERT INTO ${table.name}
+        INSERT INTO ${table.name} t where t.id in
         <trim prefix="(" suffix=")" suffixOverrides=",">
     #foreach($field in ${table.fields})
         #if(${field.keyFlag})##生成主键排在第一位
