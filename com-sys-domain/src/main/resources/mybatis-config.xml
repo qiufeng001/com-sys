@@ -14,8 +14,11 @@
         <!-- 基础管理 -->
         <mapper resource="mapper/admin/UserMapper.xml"/>
         <mapper resource="mapper/admin/MenuMapper.xml"/>
-
         <mapper resource="mapper/base/CommonMapper.xml"/>
+
+        <!-- 基础数据 -->
         <mapper resource="mapper/basecode/MaterialsMapper.xml"/>
+        <mapper resource="mapper/basecode/FormulaDetailMapper.xml"/>
+        <mapper resource="mapper/basecode/FormulaMapper.xml"/>
     </mappers>
 </configuration>

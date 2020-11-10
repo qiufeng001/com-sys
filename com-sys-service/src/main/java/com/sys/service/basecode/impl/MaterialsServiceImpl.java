@@ -1,5 +1,6 @@
 package com.sys.service.basecode.impl;
 
+import com.sys.core.exception.ServiceException;
 import com.sys.model.basecode.Materials;
 import com.sys.domain.basecode.MaterialsMapper;
 import com.sys.service.basecode.IMaterialsService;
@@ -7,6 +8,8 @@ import com.sys.core.service.impl.BaseServiceImpl;
 import com.sys.core.domain.IMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * <p>
@@ -24,5 +27,14 @@ public class MaterialsServiceImpl extends BaseServiceImpl<Materials, String> imp
 
     protected IMapper<Materials, String> getMapper() {
         return mapper;
+    }
+
+    @Override
+    public List<Materials> getAll() {
+        try {
+            return mapper.getAll();
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
     }
 }

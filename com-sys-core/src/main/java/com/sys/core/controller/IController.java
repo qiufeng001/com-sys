@@ -18,7 +18,11 @@ public interface IController <T extends IEntity, K> {
 
     public T create(T entity, HttpServletRequest request);
 
+    public T createByJson(T entity, HttpServletRequest request);
+
     public T update(T entity, HttpServletRequest request);
+
+    public T updateByJson(T entity, HttpServletRequest request);
 
     public Integer deleteByParams(Query query);
 

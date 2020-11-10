@@ -58,6 +58,14 @@ public final class CollectUtils {
         return subIdLists;
     }
 
+    public static boolean isEmpty(Collection<?> coll) {
+        return (coll == null || coll.isEmpty());
+    }
+
+    public static boolean isNotEmpty(Collection<?> coll) {
+        return null != coll && !coll.isEmpty();
+    }
+
     public static <K, V> Map<K, V> newHashMap() {
         return new HashMap<K, V>();
     }

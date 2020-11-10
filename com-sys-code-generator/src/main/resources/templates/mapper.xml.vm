@@ -133,7 +133,7 @@
     <delete id="deleteByParams" parameterType="map">
         <if test="ids != null">
             DELETE
-            FROM ${table.name}
+            FROM ${table.name} t where t.id in
             <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
                 #{item}
             </foreach>
