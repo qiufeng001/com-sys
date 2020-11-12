@@ -1,7 +1,9 @@
 package com.sys.model.basecode;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.sys.core.base.Entity;
+import com.sys.core.dto.FrontEndFileDto;
+
+import java.util.List;
 
 /**
  * <p>
@@ -31,6 +33,8 @@ public class Materials extends Entity {
      * 说明
      */
     private String instructions;
+
+    private List<FrontEndFileDto> files;
 
 
     public String getName() {
@@ -63,6 +67,14 @@ public class Materials extends Entity {
 
     public void setInstructions(String instructions) {
         this.instructions = instructions;
+    }
+
+    public List<FrontEndFileDto> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<FrontEndFileDto> files) {
+        this.files = files;
     }
 
     @Override

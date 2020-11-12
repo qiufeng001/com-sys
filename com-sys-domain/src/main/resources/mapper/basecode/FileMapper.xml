@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sys.domain.basecode.MaterialsMapper">
+<mapper namespace="com.sys.domain.basecode.FileMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.sys.model.basecode.Materials">
+    <resultMap id="BaseResultMap" type="com.sys.model.basecode.File">
         <result column="id" property="id"/>
-        <result column="name" property="name"/>
-        <result column="attribute" property="attribute"/>
-        <result column="efficacy" property="efficacy"/>
-        <result column="instructions" property="instructions"/>
+        <result column="file_name" property="fileName"/>
+        <result column="file_type" property="fileType"/>
+        <result column="file_size" property="fileSize"/>
+        <result column="file_path" property="filePath"/>
+        <result column="material_id" property="materialId"/>
+        <result column="base64_type" property="base64Type"/>
     </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="colums_condition">
         id,
-    name, attribute, efficacy, instructions
+    file_name, file_type, file_size, file_path,material_id,base64_type
     </sql>
 
     <sql id="condition">
@@ -24,17 +26,20 @@
             <if test="params.id != null and params.id != ''">
                 and id = #{params.id}
             </if>
-            <if test="params.name != null and params.name != ''">
-                and name like '%${params.name}%'
+            <if test="params.fileName != null and params.fileName != ''">
+                and file_name like '%${params.fileName}'
             </if>
-            <if test="params.attribute != null and params.attribute != ''">
-                and attribute like '%${params.attribute}%'
+            <if test="params.fileType != null and params.fileType != ''">
+                and file_type like '%${params.fileType}'
             </if>
-            <if test="params.efficacy != null and params.efficacy != ''">
-                and efficacy like '%${params.efficacy}%'
+            <if test="params.fileSize != null and params.fileSize != ''">
+                and file_size like '%${params.fileSize}'
             </if>
-            <if test="params.instructions != null and params.instructions != ''">
-                and instructions like '%${params.instructions}%'
+            <if test="params.filePath != null and params.filePath != ''">
+                and file_path like '%${params.filePath}'
+            </if>
+            <if test="params.materialId != null and params.materialId != ''">
+                and material_id = #{params.materialId}
             </if>
         </if>
     </sql>
@@ -50,14 +55,14 @@
         SELECT
         <include refid="colums_condition"/>
         FROM
-        t_materials
+        t_file
         WHERE id = #{id};
     </select>
 
     <select id="findByUnique" resultMap="BaseResultMap">
         SELECT
         <include refid="colums_condition"/>
-        FROM t_materials
+        FROM t_file
         WHERE
         <include refid="uniqe_condition"/>
         limit 1
@@ -66,21 +71,21 @@
     <select id="findByParam" resultMap="BaseResultMap" parameterType="map">
         SELECT
         <include refid="colums_condition"/>
-        FROM t_materials
+        FROM t_file
         WHERE 1=1
         <include refid="condition"/>
         LIMIT #{page.startRowNum} ,#{page.pageSize}
     </select>
 
     <select id="selectCount" resultType="java.lang.Integer">
-        SELECT COUNT(1) as s FROM t_materials WHERE 1=1
+        SELECT COUNT(1) as s FROM t_file WHERE 1=1
         <include refid="condition"/>
     </select>
 
     <select id="selectByPage" resultMap="BaseResultMap" parameterType="map">
         SELECT
         <include refid="colums_condition"/>
-        FROM t_materials WHERE 1=1
+        FROM t_file WHERE 1=1
         <include refid="condition"/>
         <if test="orderby != null and ''!=orderby">
             ORDER BY ${orderby}
@@ -88,28 +93,21 @@
         LIMIT #{page.startRowNum} ,#{page.pageSize}
     </select>
 
-    <select id="getAll" resultMap="BaseResultMap" parameterType="map">
-        SELECT
-        <include refid="colums_condition"/>
-        FROM t_materials
-    </select>
-
-
     <select id="selectByParams" resultMap="BaseResultMap" parameterType="map">
         SELECT
         <include refid="colums_condition"/>
-        FROM t_materials t
+        FROM t_file t
         where 1=1
         <include refid="condition"/>
     </select>
 
     <delete id="deleteByPrimaryKey">
-		DELETE FROM t_materials
+		DELETE FROM t_file
 		WHERE id = #{id}
 	</delete>
 
     <delete id="deleteByUnique">
-        DELETE FROM t_materials
+        DELETE FROM t_file
         WHERE
         <include refid="uniqe_condition"/>
     </delete>
@@ -117,71 +115,84 @@
     <delete id="deleteByParams" parameterType="map">
         <if test="ids != null">
             DELETE
-            FROM t_materials t where t.id in
+            FROM t_file t where t.id in
             <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
                 #{item}
             </foreach>
         </if>
     </delete>
 
-    <select id="deleteByParams" parameterType="map">
-        DELETE
-        FROM t_materials t where 1 = 1
-        <include refid="condition"/>
-    </select>
-
-    <insert id="insert" parameterType="com.sys.model.basecode.Materials">
-        INSERT INTO t_materials
+    <insert id="insert" parameterType="com.sys.model.basecode.File">
+        INSERT INTO t_file
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
             </if>
-            <if test="name != null">
-                name,
+            <if test="fileName != null">
+                file_name,
             </if>
-            <if test="attribute != null">
-                attribute,
+            <if test="fileType != null">
+                file_type,
             </if>
-            <if test="efficacy != null">
-                efficacy,
+            <if test="fileSize != null">
+                file_size,
             </if>
-            <if test="instructions != null">
-                instructions,
+            <if test="filePath != null">
+                file_path,
             </if>
+            <if test="materialId != null">
+                material_id,
+            </if>
+            <if test="base64Type != null">
+                base64_type,
+            </if>
+
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id},
             </if>
-            <if test="name != null">
-                #{name},
+            <if test="fileName != null">
+                #{fileName},
             </if>
-            <if test="attribute != null">
-                #{attribute},
+            <if test="fileType != null">
+                #{fileType},
             </if>
-            <if test="efficacy != null">
-                #{efficacy},
+            <if test="fileSize != null">
+                #{fileSize},
             </if>
-            <if test="instructions != null">
-                #{instructions},
+            <if test="filePath != null">
+                #{filePath},
+            </if>
+            <if test="materialId != null">
+                #{materialId},
+            </if>
+            <if test="base64Type != null">
+                #{base64Type},
             </if>
         </trim>
     </insert>
 
-    <update id="update" parameterType="com.sys.model.basecode.Materials">
-        UPDATE t_materials
+    <update id="update" parameterType="com.sys.model.basecode.File">
+        UPDATE t_file
         <set>
-            <if test="name != null">
-                name = #{name},
+            <if test="fileName != null">
+                file_name = #{fileName},
             </if>
-            <if test="attribute != null">
-                attribute = #{attribute},
+            <if test="fileType != null">
+                file_type = #{fileType},
             </if>
-            <if test="efficacy != null">
-                efficacy = #{efficacy},
+            <if test="fileSize != null">
+                file_size = #{fileSize},
             </if>
-            <if test="instructions != null">
-                instructions = #{instructions},
+            <if test="filePath != null">
+                file_path = #{filePath},
+            </if>
+            <if test="materialId != null">
+                material_id = #{materialId},
+            </if>
+            <if test="base64Type != null">
+                base64_type = #{base64Type},
             </if>
         </set>
         WHERE id = #{id}

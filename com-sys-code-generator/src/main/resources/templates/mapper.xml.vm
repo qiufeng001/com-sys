@@ -141,7 +141,7 @@
     </delete>
 
     <insert id="insert" parameterType="${package.Entity}.${entity}">
-        INSERT INTO ${table.name} t where t.id in
+        INSERT INTO ${table.name}
         <trim prefix="(" suffix=")" suffixOverrides=",">
     #foreach($field in ${table.fields})
         #if(${field.keyFlag})##生成主键排在第一位

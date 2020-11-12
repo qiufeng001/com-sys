@@ -94,6 +94,7 @@
     <delete id="deleteByPrimaryKey">
 		DELETE FROM t_formula
 		WHERE id = #{id}
+		 DELETE FROM t_formula_detail where formula_id = #{id}
 	</delete>
 
     <delete id="deleteByUnique">
@@ -106,6 +107,10 @@
         <if test="ids != null">
             DELETE
             FROM t_formula  t where t.id in
+            <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+             DELETE FROM t_formula_detail where formula_id in
             <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
                 #{item}
             </foreach>

@@ -20,5 +20,6 @@
         <mapper resource="mapper/basecode/MaterialsMapper.xml"/>
         <mapper resource="mapper/basecode/FormulaDetailMapper.xml"/>
         <mapper resource="mapper/basecode/FormulaMapper.xml"/>
+        <mapper resource="mapper/basecode/FileMapper.xml"/>
     </mappers>
 </configuration>

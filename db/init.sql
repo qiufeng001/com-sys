@@ -160,3 +160,11 @@ CREATE TABLE `t_company` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO t_company (`id`, `name`, `zone_id`, `address`, `phone_num`, `legal_person`, `legal_person_num`, `session_invalid_time`) VALUES ('1', '屌丝公司', '1', '屌丝大道1号', '222222', '屌丝', '12122222223', '30');
+
+-- 材料删除同时删除文件
+create trigger del_material
+after delete on t_materials
+for each row
+begin
+    DELETE  FROM t_file WHERE material_id = old.id;
+end;
