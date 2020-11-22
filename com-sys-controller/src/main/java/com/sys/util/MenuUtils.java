@@ -1,5 +1,6 @@
 package com.sys.util;
 
+import com.sys.core.util.CollectUtils;
 import com.sys.model.admin.Menu;
 import org.apache.commons.lang3.StringUtils;
 
@@ -28,6 +29,9 @@ public class MenuUtils {
         for (Menu menu : menuList) {
             menu.setChildMenus(getChild(menu.getId(), rootMenu));
         }
+        // 添加key
+        genKey(menuList);
+
         return menuList;
     }
 
@@ -64,5 +68,24 @@ public class MenuUtils {
             return null;
         }
         return childList;
+    }
+
+    /**
+     * 为二级菜单添加key
+     * @param menus
+     */
+    private static void genKey(List<Menu> menus) {
+        if(CollectUtils.isNotEmpty(menus)) {
+            int key = 1;
+            for (Menu menu : menus) {
+                List<Menu> childMenus = menu.getChildMenus();
+                if(CollectUtils.isNotEmpty(menus)) {
+                    for (Menu childMenu : childMenus) {
+                        childMenu.setKey(key);
+                        key++;
+                    }
+                }
+            }
+        }
     }
 }

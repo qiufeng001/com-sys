@@ -11,7 +11,7 @@
 
     <select id="getAccountMenu" resultMap="MenuBaseResultMap">
         SELECT
-            id, code, name
+            id, code, name,p_id
         FROM
             t_menu
 

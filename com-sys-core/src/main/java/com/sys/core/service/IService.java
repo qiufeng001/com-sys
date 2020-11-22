@@ -1,7 +1,6 @@
 package com.sys.core.service;
 
 import com.sys.core.entity.IEntity;
-import com.sys.core.exception.ServiceException;
 import com.sys.core.query.Pagenation;
 import com.sys.core.query.Query;
 

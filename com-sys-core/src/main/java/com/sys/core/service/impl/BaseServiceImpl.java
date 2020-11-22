@@ -3,7 +3,6 @@ package com.sys.core.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.sys.core.base.Entity;
 import com.sys.core.domain.IMapper;
-import com.sys.core.entity.BaseEntity;
 import com.sys.core.entity.IEntity;
 import com.sys.core.exception.ServiceException;
 import com.sys.core.query.Pagenation;

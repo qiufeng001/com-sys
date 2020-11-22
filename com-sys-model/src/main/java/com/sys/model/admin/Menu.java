@@ -29,6 +29,9 @@ public class Menu extends Entity {
 
     private String sequence;
 
+    /** 记录添加的位置 顺延*/
+    private Integer key;
+
     private List<Menu> childMenus = CollectUtils.newArrayList();
 
     public String getCode() {
@@ -77,5 +80,13 @@ public class Menu extends Entity {
 
     public void setChildMenus(List<Menu> childMenus) {
         this.childMenus = childMenus;
+    }
+
+    public Integer getKey() {
+        return key;
+    }
+
+    public void setKey(Integer key) {
+        this.key = key;
     }
 }
