@@ -166,5 +166,5 @@ create trigger del_material
 after delete on t_materials
 for each row
 begin
-    DELETE  FROM t_file WHERE material_id = old.id;
+    DELETE  FROM t_file WHERE entity_id = old.id;
 end;

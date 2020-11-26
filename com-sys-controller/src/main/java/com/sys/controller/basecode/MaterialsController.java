@@ -45,27 +45,5 @@ public class MaterialsController extends BaseController<Materials, String> {
         return service.getAll();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    @Override
-    public Materials findByPrimaryKey(@PathVariable String id) {
-        Materials material = service.findByPrimaryKey(id);
-        // 查询明细
-        Query detailQuery = new Query();
-        Statement detailStatement = new Statement();
-        detailStatement.setName("materialId");
-        detailStatement.setValue(material.getId());
-        detailQuery.where(detailStatement);
-        List<File> files = fileService.selectByParams(detailQuery);
-        if(CollectUtils.isNotEmpty(files)) {
-            List<FrontEndFileDto> dtos = CollectUtils.newArrayList();
-            for(File file : files) {
-                FrontEndFileDto dto = FileUtils.encodeBase64(file);
-                dtos.add(dto);
-            }
-
-            material.setFiles(dtos);
-        }
-        return material;
-    }
-            }
+}
 

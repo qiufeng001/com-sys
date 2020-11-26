@@ -9,13 +9,13 @@
         <result column="file_type" property="fileType"/>
         <result column="file_size" property="fileSize"/>
         <result column="file_path" property="filePath"/>
-        <result column="material_id" property="materialId"/>
+        <result column="entity_id" property="entityId"/>
         <result column="base64_type" property="base64Type"/>
     </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="colums_condition">
         id,
-    file_name, file_type, file_size, file_path,material_id,base64_type
+    file_name, file_type, file_size, file_path,entity_id,base64_type
     </sql>
 
     <sql id="condition">
@@ -38,8 +38,8 @@
             <if test="params.filePath != null and params.filePath != ''">
                 and file_path like '%${params.filePath}'
             </if>
-            <if test="params.materialId != null and params.materialId != ''">
-                and material_id = #{params.materialId}
+            <if test="params.entityId != null and params.entityId != ''">
+                and entity_id = #{params.entityId}
             </if>
         </if>
     </sql>
@@ -140,8 +140,8 @@
             <if test="filePath != null">
                 file_path,
             </if>
-            <if test="materialId != null">
-                material_id,
+            <if test="entityId != null">
+                entity_id,
             </if>
             <if test="base64Type != null">
                 base64_type,
@@ -164,8 +164,8 @@
             <if test="filePath != null">
                 #{filePath},
             </if>
-            <if test="materialId != null">
-                #{materialId},
+            <if test="entityId != null">
+                #{entityId},
             </if>
             <if test="base64Type != null">
                 #{base64Type},
@@ -188,8 +188,8 @@
             <if test="filePath != null">
                 file_path = #{filePath},
             </if>
-            <if test="materialId != null">
-                material_id = #{materialId},
+            <if test="entityId != null">
+                entity_id = #{entityId},
             </if>
             <if test="base64Type != null">
                 base64_type = #{base64Type},

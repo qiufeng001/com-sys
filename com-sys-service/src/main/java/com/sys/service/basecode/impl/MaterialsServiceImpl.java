@@ -8,7 +8,6 @@ import com.sys.core.query.IStatement;
 import com.sys.core.query.Query;
 import com.sys.core.query.Statement;
 import com.sys.core.util.CollectUtils;
-import com.sys.core.util.FileUtils;
 import com.sys.core.util.UUIDUtils;
 import com.sys.domain.basecode.FileMapper;
 import com.sys.core.entity.File;
@@ -17,6 +16,7 @@ import com.sys.domain.basecode.MaterialsMapper;
 import com.sys.service.basecode.IMaterialsService;
 import com.sys.core.service.impl.BaseServiceImpl;
 import com.sys.core.domain.IMapper;
+import com.sys.service.utils.FileUtils;
 import org.jasig.cas.client.authentication.AttributePrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +54,26 @@ public class MaterialsServiceImpl extends BaseServiceImpl<Materials, String> imp
     public List<Materials> getAll() {
         try {
             return mapper.getAll();
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly=true)
+    public Materials findByPrimaryKey(String id) {
+        try {
+            Materials materials = super.findByPrimaryKey(id);
+            List<File> files = getMapper().selectFileByEntityId(materials.getId());
+            if(CollectUtils.isNotEmpty(files)) {
+                List<FrontEndFileDto> dtos = CollectUtils.newArrayList();
+                for(File file : files) {
+                    FrontEndFileDto dto = FileUtils.encodeBase64(file);
+                    dtos.add(dto);
+                }
+                materials.setFiles(dtos);
+            }
+            return materials;
         } catch (Exception e) {
             throw new ServiceException(e);
         }
