@@ -316,7 +316,9 @@ public abstract class BaseServiceImpl<T extends IEntity, K> implements IService<
     protected void deleteFile(T entity) {
         List<File> files = getMapper().selectFileByEntityId(entity.getId().toString());
         UploadFileUtils.delFile(files);
-        getMapper().deleteFileyEntityId(entity.getId().toString());
+        List<String> ids = CollectUtils.newArrayList();
+        ids.add(entity.getId().toString());
+        getMapper().deleteFileyEntityId(ids);
     }
 
     @SuppressWarnings("unchecked")

@@ -49,5 +49,5 @@ public interface IMapper<T extends IEntity, K> {
 
     public List<File> selectFileByEntityId(@Param("entityId") String entityId);
 
-    public void deleteFileyEntityId(@Param("entityId") String entityId);
+    public void deleteFileyEntityId(@Param("ids") List<String> ids);
 }

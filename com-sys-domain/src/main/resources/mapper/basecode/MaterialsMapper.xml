@@ -16,6 +16,22 @@
     name, attribute, efficacy, instructions
     </sql>
 
+    <!-- 通用查询映射结果 -->
+    <resultMap id="FileMap" type="com.sys.core.entity.File">
+        <result column="id" property="id"/>
+        <result column="file_name" property="fileName"/>
+        <result column="file_type" property="fileType"/>
+        <result column="file_size" property="fileSize"/>
+        <result column="file_path" property="filePath"/>
+        <result column="material_id" property="materialId"/>
+        <result column="base64_type" property="base64Type"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="file_colums_condition">
+        id,
+    file_name, file_type, file_size, file_path,material_id,base64_type
+    </sql>
+
     <sql id="condition">
         <if test="null!=params">
             <if test="null!=params.queryCondition and ''!=params.queryCondition">
@@ -186,5 +202,74 @@
         </set>
         WHERE id = #{id}
     </update>
+
+    <insert id="insertWithFile" parameterType="com.sys.core.entity.File">
+        INSERT INTO t_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="fileName != null">
+                file_name,
+            </if>
+            <if test="fileType != null">
+                file_type,
+            </if>
+            <if test="fileSize != null">
+                file_size,
+            </if>
+            <if test="filePath != null">
+                file_path,
+            </if>
+            <if test="materialId != null">
+                material_id,
+            </if>
+            <if test="base64Type != null">
+                base64_type,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="fileName != null">
+                #{fileName},
+            </if>
+            <if test="fileType != null">
+                #{fileType},
+            </if>
+            <if test="fileSize != null">
+                #{fileSize},
+            </if>
+            <if test="filePath != null">
+                #{filePath},
+            </if>
+            <if test="materialId != null">
+                #{materialId},
+            </if>
+            <if test="base64Type != null">
+                #{base64Type},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectByParams" resultMap="FileMap" parameterType="java.lnag.String">
+        SELECT
+        <include refid="file_colums_condition"/>
+        FROM t_file t
+        where 1=1
+        <include refid="condition"/>
+    </select>
+
+    <delete id="deleteFileyEntityId" parameterType="list">
+        <if test="ids != null">
+            DELETE
+            FROM t_file t where t.id in
+            <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </delete>
     <!-- auto generate end -->
 </mapper>
