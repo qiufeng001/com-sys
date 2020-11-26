@@ -1,7 +1,6 @@
-package com.sys.service.utils;
+package com.sys.core.util;
 
 import com.sys.core.dto.FrontEndFileDto;
-import com.sys.core.util.CollectUtils;
 import com.sys.core.entity.File;
 import org.apache.commons.codec.binary.Base64;
 
@@ -9,8 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
-
-public class FileUtils {
+public class UploadFileUtils {
 
     /**
      * 图片文件转成base64吗

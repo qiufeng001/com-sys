@@ -3,13 +3,19 @@ package com.sys.core.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.sys.core.base.Entity;
 import com.sys.core.domain.IMapper;
+import com.sys.core.dto.FrontEndFileDto;
+import com.sys.core.entity.File;
 import com.sys.core.entity.IEntity;
 import com.sys.core.exception.ServiceException;
+import com.sys.core.query.IStatement;
 import com.sys.core.query.Pagenation;
 import com.sys.core.query.Query;
+import com.sys.core.query.Statement;
 import com.sys.core.service.IService;
 import com.sys.core.util.CollectUtils;
+import com.sys.core.util.FileUtils;
 import com.sys.core.util.UUIDUtils;
+import com.sys.core.util.UploadFileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jasig.cas.client.authentication.AttributePrincipal;
@@ -99,6 +105,24 @@ public abstract class BaseServiceImpl<T extends IEntity, K> implements IService<
 
     @Override
     @Transactional(readOnly=false, isolation = Isolation.READ_COMMITTED, rollbackFor=Exception.class)
+    public Integer insertWithFile(T entry, HttpServletRequest request) {
+        initEntry(entry, request);
+        try {
+            // 第一步保存配方主数据
+            Integer count = getMapper().insert(entry);
+            // 第二步保存子表
+            String path = "\\nfs" + java.io.File.separator +
+                    entry.getClass().getName().replaceAll(".*\\.","").toLowerCase() +
+                    java.io.File.separator;
+            this.saveFile(path, entry, request);
+            return count;
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly=false, isolation = Isolation.READ_COMMITTED, rollbackFor=Exception.class)
     public Integer batchesInsert(List<T> list) {
 
         int count = 0;
@@ -125,6 +149,26 @@ public abstract class BaseServiceImpl<T extends IEntity, K> implements IService<
             throw new ServiceException(e);
         }
 
+    }
+
+    @Override
+    @Transactional(readOnly=false, isolation = Isolation.READ_COMMITTED, rollbackFor=Exception.class)
+    public Integer updateWithFile(T entry, HttpServletRequest request) {
+        try {
+            Entity item = (Entity) entry;
+            AttributePrincipal principal = (AttributePrincipal) request.getUserPrincipal();;
+            if (principal != null) {
+                item.setUpdateUser(principal.getName());
+            }
+            item.setUpdateTime(new Date());
+            // 修改前删除文件表
+            this.deleteFile(entry);
+            // 第二步保存子表
+            this.saveFile("/nfs/" + entry.getName().toLowerCase(), entry, request);
+            return getMapper().update(entry);
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
     }
 
     @Override
@@ -227,6 +271,52 @@ public abstract class BaseServiceImpl<T extends IEntity, K> implements IService<
                 && (item.getId() == null || item.getId().toString() == "")) {
             item.setId(generateId());
         }
+    }
+
+    protected void saveFile(String filePath, T entry, HttpServletRequest request) {
+        // 第二步保存子表
+        List<FrontEndFileDto> dtos = entry.getFiles();
+        if(CollectUtils.isNotEmpty(dtos)) {
+            for (FrontEndFileDto dto : dtos) {
+                String thumbUrl = dto.getThumbUrl();
+                String[] thumbUrls = thumbUrl.split("base64,");
+
+                String base64Str = thumbUrls[1];
+                String path = FileUtils.decoderToFile(filePath, base64Str);
+                File file = new File();
+                this.initFileEntry(file, request);
+                file.setFileName(dto.getName());
+                file.setFilePath(path);
+                file.setFileSize(dto.getSize());
+                file.setFileType(dto.getType().split("/")[1]);
+                file.setBase64Type(thumbUrls[0] + "base64,");
+                file.setEntityId(entry.getId().toString());
+                getMapper().insertWithFile(file);
+            }
+        }
+    }
+
+    protected void initFileEntry(File entry, HttpServletRequest request) {
+        Entity item = (Entity) entry;
+        Date date = new Date();
+        AttributePrincipal principal = (AttributePrincipal) request.getUserPrincipal();;
+        if (principal != null && item.getCreateTime() == null) {
+            item.setCreateTime(date);
+            item.setCreateUser(principal.getName());
+            item.setUpdateTime(date);
+            item.setUpdateUser(item.getCreateUser());
+            item.setId(UUIDUtils.getUUID());
+        }
+        if (idClass != null && idClass.getSimpleName().equals("String")
+                && (item.getId() == null || item.getId().toString() == "")) {
+            item.setId(generateId());
+        }
+    }
+
+    protected void deleteFile(T entity) {
+        List<File> files = getMapper().selectFileByEntityId(entity.getId().toString());
+        UploadFileUtils.delFile(files);
+        getMapper().deleteFileyEntityId(entity.getId().toString());
     }
 
     @SuppressWarnings("unchecked")

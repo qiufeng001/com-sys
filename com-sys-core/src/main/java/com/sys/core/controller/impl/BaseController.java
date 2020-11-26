@@ -88,6 +88,14 @@ public abstract class BaseController<T extends IEntity, K> extends AbstractContr
         return entry;
     }
 
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.POST, value = "/createWithFile")
+    @Override
+    public T createWithFile(@RequestBody T entry, HttpServletRequest request) {
+        getService().insertWithFile(entry, request);
+        return entry;
+    }
+
     /**
      * 如果是对象种包含集合，需要用这个方法
      * @param entry
@@ -120,6 +128,18 @@ public abstract class BaseController<T extends IEntity, K> extends AbstractContr
     public T updateByJson(@RequestBody T entry, HttpServletRequest request) throws JsonManagerException {
         try {
             getService().update(entry, request);
+            return entry;
+        } catch (ServiceException e) {
+            throw new JsonManagerException(e);
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.POST, value = "/updateWithFile")
+    @Override
+    public T updateWithFile(@RequestBody T entry, HttpServletRequest request) throws JsonManagerException {
+        try {
+            getService().updateWithFile(entry, request);
             return entry;
         } catch (ServiceException e) {
             throw new JsonManagerException(e);

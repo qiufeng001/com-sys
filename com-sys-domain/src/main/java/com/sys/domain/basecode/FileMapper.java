@@ -1,6 +1,6 @@
 package com.sys.domain.basecode;
 
-import com.sys.model.basecode.File;
+import com.sys.core.entity.File;
 import com.sys.core.domain.IMapper;
 
 /**

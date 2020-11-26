@@ -1,4 +1,4 @@
-package com.sys.model.basecode;
+package com.sys.core.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.sys.core.base.Entity;
@@ -35,7 +35,7 @@ public class File extends Entity {
      */
     private String filePath;
 
-    private String materialId;
+    private String entityId;
 
     private String base64Type;
 
@@ -71,12 +71,12 @@ public class File extends Entity {
         this.filePath = filePath;
     }
 
-    public String getMaterialId() {
-        return materialId;
+    public String getEntityId() {
+        return entityId;
     }
 
-    public void setMaterialId(String materialId) {
-        this.materialId = materialId;
+    public void setEntityId(String entityId) {
+        this.entityId = entityId;
     }
 
     public String getBase64Type() {

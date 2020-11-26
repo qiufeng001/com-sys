@@ -1,12 +1,12 @@
-package com.sys.controller.basecode;
+package com.sys.controller.admin;
 
-import com.sys.core.entity.File;
+import com.sys.model.admin.Shop;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import com.sys.core.controller.impl.BaseController;
 import com.sys.core.service.IService;
-import com.sys.service.basecode.IFileService;
+import com.sys.service.admin.IShopService;
 
 /**
  * <p>
@@ -14,17 +14,17 @@ import com.sys.service.basecode.IFileService;
  * </p>
  *
  * @author zhong.h
- * @since 2020-11-11
+ * @since 2020-11-26
  */
 @RestController
-@RequestMapping("/file/*")
-public class FileController extends BaseController<File, String> {
+@RequestMapping("/shop/*")
+public class ShopController extends BaseController<Shop, String> {
 
     @Autowired
-    private IFileService service;
+    private IShopService service;
 
     @Override
-    protected IService<File, String> getService() {
+    protected IService<Shop, String> getService() {
         return service;
     }
 }

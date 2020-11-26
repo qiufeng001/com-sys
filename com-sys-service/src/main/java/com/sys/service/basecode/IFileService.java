@@ -1,6 +1,6 @@
 package com.sys.service.basecode;
 
-import com.sys.model.basecode.File;
+import com.sys.core.entity.File;
 import com.sys.core.service.IService;
 
 /**

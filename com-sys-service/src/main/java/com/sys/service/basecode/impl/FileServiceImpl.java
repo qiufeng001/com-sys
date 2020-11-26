@@ -1,6 +1,6 @@
 package com.sys.service.basecode.impl;
 
-import com.sys.model.basecode.File;
+import com.sys.core.entity.File;
 import com.sys.domain.basecode.FileMapper;
 import com.sys.service.basecode.IFileService;
 import com.sys.core.service.impl.BaseServiceImpl;

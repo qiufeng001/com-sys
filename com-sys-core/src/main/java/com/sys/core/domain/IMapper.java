@@ -1,5 +1,6 @@
 package com.sys.core.domain;
 
+import com.sys.core.entity.File;
 import com.sys.core.entity.IEntity;
 import com.sys.core.query.Pagenation;
 import org.apache.ibatis.annotations.Param;
@@ -43,4 +44,10 @@ public interface IMapper<T extends IEntity, K> {
      * 验证
      */
     public Integer validate(@Param("params") Map<String, Object> params);
+
+    public Integer insertWithFile(File entry);
+
+    public List<File> selectFileByEntityId(@Param("entityId") String entityId);
+
+    public void deleteFileyEntityId(@Param("entityId") String entityId);
 }

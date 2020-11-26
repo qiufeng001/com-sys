@@ -2,12 +2,14 @@ package com.sys.core.base;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.sys.core.dto.FrontEndFileDto;
 import com.sys.core.entity.IEntity;
 import com.sys.core.util.date.JsonDateDeserializer;
 import com.sys.core.util.date.JsonDefaultDateSerializer;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Entity 基础类，默认主键为 String 类型
@@ -37,6 +39,8 @@ public abstract class Entity implements Serializable, IEntity<String> {
     /** 更新者 ，因为无论是哪一个用户，都会有创建者和修改者，因此，将这个抽出来，公用*/
     private String updateUser;
 
+    private List<FrontEndFileDto> files;
+
     @Override
     public String getId() {
         return id;
@@ -51,6 +55,7 @@ public abstract class Entity implements Serializable, IEntity<String> {
     public void setName(String name) {
         this.name = name;
     }
+
 
     @Override
     public String getName() {
@@ -87,5 +92,13 @@ public abstract class Entity implements Serializable, IEntity<String> {
 
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
+    }
+
+    public List<FrontEndFileDto> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<FrontEndFileDto> files) {
+        this.files = files;
     }
 }

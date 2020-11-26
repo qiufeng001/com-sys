@@ -27,9 +27,13 @@ public interface IService <T extends IEntity, K> {
 
     public Integer insert(T entry, HttpServletRequest request);
 
+    public Integer insertWithFile(T entry, HttpServletRequest request);
+
     public Integer batchesInsert(List<T> list);
 
     public Integer update(T entry, HttpServletRequest request);
+
+    public Integer updateWithFile(T entry, HttpServletRequest request);
 
     public Integer deleteByParams(Query query);
 

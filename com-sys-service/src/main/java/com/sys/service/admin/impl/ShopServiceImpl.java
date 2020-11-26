@@ -1,4 +1,4 @@
-package com.sys.service.basecode.impl;
+package com.sys.service.admin.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.sys.core.base.Entity;
@@ -11,10 +11,10 @@ import com.sys.core.util.CollectUtils;
 import com.sys.core.util.FileUtils;
 import com.sys.core.util.UUIDUtils;
 import com.sys.domain.basecode.FileMapper;
+import com.sys.model.admin.Shop;
+import com.sys.domain.admin.ShopMapper;
 import com.sys.core.entity.File;
-import com.sys.model.basecode.Materials;
-import com.sys.domain.basecode.MaterialsMapper;
-import com.sys.service.basecode.IMaterialsService;
+import com.sys.service.admin.IShopService;
 import com.sys.core.service.impl.BaseServiceImpl;
 import com.sys.core.domain.IMapper;
 import org.jasig.cas.client.authentication.AttributePrincipal;
@@ -30,33 +30,22 @@ import java.util.Map;
 
 /**
  * <p>
- * 材料表 服务实现类
+ *  服务实现类
  * </p>
  *
  * @author zhong.h
- * @since 2020-11-07
+ * @since 2020-11-26
  */
 @Service
-public class MaterialsServiceImpl extends BaseServiceImpl<Materials, String> implements IMaterialsService {
-
-    private static final String FILE_BASE_PATH = "\\nfs\\material\\";
-
+public class ShopServiceImpl extends BaseServiceImpl<Shop, String> implements IShopService {
+    private static final String FILE_BASE_PATH = "\\nfs\\shop\\";
     @Autowired
-    private MaterialsMapper mapper;
+    private ShopMapper mapper;
     @Autowired
     private FileMapper fileMapper;
 
-    protected IMapper<Materials, String> getMapper() {
+    protected IMapper<Shop, String> getMapper() {
         return mapper;
-    }
-
-    @Override
-    public List<Materials> getAll() {
-        try {
-            return mapper.getAll();
-        } catch (Exception e) {
-            throw new ServiceException(e);
-        }
     }
 
     @Override

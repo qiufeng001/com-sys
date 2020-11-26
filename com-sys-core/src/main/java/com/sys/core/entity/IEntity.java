@@ -1,6 +1,9 @@
 package com.sys.core.entity;
 
+import com.sys.core.dto.FrontEndFileDto;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * IUser
@@ -34,4 +37,8 @@ public interface IEntity<K> {
     String getUpdateUser();
 
     void setUpdateUser(String updateUser);
+
+    List<FrontEndFileDto> getFiles();
+
+    void setFiles(List<FrontEndFileDto> files);
 }

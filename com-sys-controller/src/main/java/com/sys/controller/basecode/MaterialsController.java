@@ -1,14 +1,10 @@
 package com.sys.controller.basecode;
 
 import com.sys.core.dto.FrontEndFileDto;
-import com.sys.core.query.PageResult;
-import com.sys.core.query.Pagenation;
 import com.sys.core.query.Query;
 import com.sys.core.query.Statement;
 import com.sys.core.util.CollectUtils;
-import com.sys.model.basecode.File;
-import com.sys.model.basecode.Formula;
-import com.sys.model.basecode.FormulaDetail;
+import com.sys.core.entity.File;
 import com.sys.model.basecode.Materials;
 import com.sys.service.basecode.IFileService;
 import com.sys.service.utils.FileUtils;
@@ -19,7 +15,6 @@ import com.sys.core.service.IService;
 import com.sys.service.basecode.IMaterialsService;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
