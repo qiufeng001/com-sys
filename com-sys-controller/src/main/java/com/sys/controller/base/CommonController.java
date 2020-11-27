@@ -1,9 +1,11 @@
 package com.sys.controller.base;
 
 import com.sys.core.controller.impl.BaseController;
+import com.sys.core.query.Query;
 import com.sys.core.service.IService;
 import com.sys.core.util.CollectUtils;
 import com.sys.model.admin.Menu;
+import com.sys.model.base.Common;
 import com.sys.model.base.Dictions;
 import com.sys.service.base.ICommonService;
 import com.sys.service.base.IDictionsService;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * <p>
@@ -41,6 +44,13 @@ public class CommonController {
             menus = commonService.getAccountMenu(principal.getName());
         }
         return menus;
+    }
+
+    /** 验证名称或者code是否重复 */
+    @ResponseBody
+    @RequestMapping("/validate")
+    public Integer validate(Query query, HttpServletRequest request) {
+        return commonService.validate(query);
     }
 }
 

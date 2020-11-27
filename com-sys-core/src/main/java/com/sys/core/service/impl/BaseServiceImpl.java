@@ -164,7 +164,9 @@ public abstract class BaseServiceImpl<T extends IEntity, K> implements IService<
             // 修改前删除文件表
             this.deleteFile(entry);
             // 第二步保存子表
-            this.saveFile("/nfs/" + entry.getName().toLowerCase(), entry, request);
+            this.saveFile("/nfs/" + java.io.File.separator +
+                    entry.getClass().getName().replaceAll(".*\\.","").toLowerCase() +
+                    java.io.File.separator, entry, request);
             return getMapper().update(entry);
         } catch (Exception e) {
             throw new ServiceException(e);

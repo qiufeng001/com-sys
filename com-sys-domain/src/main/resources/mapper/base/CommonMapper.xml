@@ -16,5 +16,20 @@
             t_menu
 
     </select>
+
+    <select id="validate" resultType="java.lang.Integer">
+        <if test="null!=params">
+            SELECT COUNT(1) as s FROM ${params.tale} WHERE 1=1
+            <if test="null!=params.account and ''!=params.account">
+                and account = #{params.account}
+            </if>
+            <if test="null!=params.name and ''!=params.name">
+                and name = #{params.name}
+            </if>
+            <if test="null!=params.code and ''!=params.code">
+                and code=#{params.code}
+            </if>
+        </if>
+    </select>
     <!-- auto generate end -->
 </mapper>

@@ -38,6 +38,11 @@ public class Shop extends Entity {
      */
     private String tel;
 
+    private String code;
+    private Integer status;
+    private String header;
+
+
     private List<FrontEndFileDto> files;
 
     public String getName() {
@@ -78,6 +83,30 @@ public class Shop extends Entity {
 
     public void setFiles(List<FrontEndFileDto> files) {
         this.files = files;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
     }
 
     @Override

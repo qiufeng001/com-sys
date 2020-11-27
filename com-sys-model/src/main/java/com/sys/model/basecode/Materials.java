@@ -34,9 +34,6 @@ public class Materials extends Entity {
      */
     private String instructions;
 
-    private List<FrontEndFileDto> files;
-
-
     public String getName() {
         return name;
     }
@@ -67,14 +64,6 @@ public class Materials extends Entity {
 
     public void setInstructions(String instructions) {
         this.instructions = instructions;
-    }
-
-    public List<FrontEndFileDto> getFiles() {
-        return files;
-    }
-
-    public void setFiles(List<FrontEndFileDto> files) {
-        this.files = files;
     }
 
     @Override

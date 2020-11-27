@@ -1,9 +1,13 @@
 package com.sys.controller.cas;
 
 import com.sys.core.configuration.Config;
+import com.sys.core.query.Q;
+import com.sys.core.query.Query;
+import com.sys.core.query.Statement;
 import com.sys.core.util.CollectUtils;
 import com.sys.core.util.CookieUtils;
 import com.sys.security.cas.CasProperty;
+import com.sys.service.admin.IUserService;
 import org.jasig.cas.client.authentication.AttributePrincipal;
 import org.jasig.cas.client.util.AbstractCasFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +32,8 @@ public class CasController {
 
     @Autowired
     private CasProperty casProperty;
-
+    @Autowired
+    private IUserService userService;
 
     /**
      * cas 服务端配置了单点退出配置
@@ -59,7 +64,10 @@ public class CasController {
         Map<String, Object> reuslt = CollectUtils.newHashMap();
 
         AttributePrincipal principal = (AttributePrincipal)request.getUserPrincipal();
-        reuslt.put("msg", principal.getName());
+        Query query = new Query();
+        Statement statement = new Statement("account", principal.getName());
+        query.where(statement);
+        reuslt.put("user", userService.getUser(query));
         return reuslt;
     }
 

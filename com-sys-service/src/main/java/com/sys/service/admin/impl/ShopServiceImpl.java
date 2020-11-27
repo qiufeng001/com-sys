@@ -1,15 +1,12 @@
 package com.sys.service.admin.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.sys.core.base.Entity;
 import com.sys.core.dto.FrontEndFileDto;
 import com.sys.core.exception.ServiceException;
 import com.sys.core.query.IStatement;
 import com.sys.core.query.Query;
 import com.sys.core.query.Statement;
 import com.sys.core.util.CollectUtils;
-import com.sys.core.util.FileUtils;
-import com.sys.core.util.UUIDUtils;
 import com.sys.domain.basecode.FileMapper;
 import com.sys.model.admin.Shop;
 import com.sys.domain.admin.ShopMapper;
@@ -17,14 +14,12 @@ import com.sys.core.entity.File;
 import com.sys.service.admin.IShopService;
 import com.sys.core.service.impl.BaseServiceImpl;
 import com.sys.core.domain.IMapper;
-import org.jasig.cas.client.authentication.AttributePrincipal;
+import com.sys.service.utils.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -69,11 +64,32 @@ public class ShopServiceImpl extends BaseServiceImpl<Shop, String> implements IS
                     // 删除本地文件
                     com.sys.service.utils.FileUtils.delFile(files);
                 }
-                return getMapper().deleteByParams(ids);
+                mapper.deleteFileyEntityId(ids);
+                return mapper.deleteByParams(ids);
             }else {
                 return 0;
             }
 
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly=true)
+    public Shop findByPrimaryKey(String id) {
+        try {
+            Shop shop = super.findByPrimaryKey(id);
+            List<File> files = getMapper().selectFileByEntityId(shop.getId());
+            if(CollectUtils.isNotEmpty(files)) {
+                List<FrontEndFileDto> dtos = CollectUtils.newArrayList();
+                for(File file : files) {
+                    FrontEndFileDto dto = FileUtils.encodeBase64(file);
+                    dtos.add(dto);
+                }
+                shop.setFiles(dtos);
+            }
+            return shop;
         } catch (Exception e) {
             throw new ServiceException(e);
         }

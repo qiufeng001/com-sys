@@ -20,6 +20,8 @@ public class User extends Entity {
     /** 状态 */
     private Integer status;
 
+    private String password;
+
     public String getAccount() {
         return account;
     }
@@ -42,5 +44,13 @@ public class User extends Entity {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
