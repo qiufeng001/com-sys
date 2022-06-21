@@ -31,7 +31,7 @@
         <fastjson.verson>2.10.0</fastjson.verson>
         <shiro-cas.version>1.5.1</shiro-cas.version>
         <cas-client.version>2.3.0-GA</cas-client.version>
-        <mysql.version>8.0.17</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
     </properties>
 
     <dependencies>
