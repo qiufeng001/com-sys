@@ -28,7 +28,7 @@
         <spring.version>5.2.0.RELEASE</spring.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-lang.version>2.6</commons-lang.version>
-        <fastjson.verson>2.10.0</fastjson.verson>
+        <fastjson.verson>2.13.4.1</fastjson.verson>
         <shiro-cas.version>1.5.1</shiro-cas.version>
         <cas-client.version>2.3.0-GA</cas-client.version>
         <mysql.version>8.0.17</mysql.version>
